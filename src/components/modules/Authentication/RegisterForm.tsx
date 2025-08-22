@@ -15,8 +15,9 @@ import { Link, useNavigate } from "react-router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Password from "@/components/ui/Password";
-import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
+import { useRegisterMutation } from "@/redux/features/auth/auth.api";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
 const registerSchema = z
@@ -32,6 +33,11 @@ const registerSchema = z
         confirmPassword: z
             .string()
             .min(8, { error: "Confirm Password is too short" }),
+        // Extra
+        role: z.enum(["USER", "AGENT"] as const, {
+            message: "Select a valid role",
+        }),
+
     })
     .refine((data) => data.password === data.confirmPassword, {
         message: "Password do not match",
@@ -52,6 +58,7 @@ export function RegisterForm({
             email: "",
             password: "",
             confirmPassword: "",
+            role: "USER",
         },
     });
 
@@ -60,6 +67,7 @@ export function RegisterForm({
             name: data.name,
             email: data.email,
             password: data.password,
+            role: data.role,
         };
 
         try {
@@ -67,6 +75,7 @@ export function RegisterForm({
             console.log(result);
             toast.success("User created successfully");
             navigate("/verify", { state: data.email });
+            // navigate("/login");
         } catch (error) {
             console.error(error);
         }
@@ -84,6 +93,36 @@ export function RegisterForm({
             <div className="grid gap-6">
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                        {/* Role Start */}
+                        <FormField
+                            control={form.control}
+                            name="role"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Role</FormLabel>
+                                    <Select
+                                        onValueChange={field.onChange}
+                                        value={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder="Select Role" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectGroup>
+                                                <SelectLabel>Choose Role</SelectLabel>
+                                                <SelectItem value="USER">User</SelectItem>
+                                                <SelectItem value="AGENT">Agent</SelectItem>
+                                            </SelectGroup>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        {/* Role End */}
                         <FormField
                             control={form.control}
                             name="name"

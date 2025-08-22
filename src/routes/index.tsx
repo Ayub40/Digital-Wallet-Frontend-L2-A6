@@ -2,6 +2,7 @@ import App from "@/App";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import Homepage from "@/pages/Homepage";
+import Verify from "@/pages/Verify";
 
 import { createBrowserRouter } from "react-router";
 
@@ -24,5 +25,9 @@ export const router = createBrowserRouter([
     {
         Component: Register,
         path: "/register"
+    },
+    {
+        Component: Verify,
+        path: "/verify"
     }
 ]);

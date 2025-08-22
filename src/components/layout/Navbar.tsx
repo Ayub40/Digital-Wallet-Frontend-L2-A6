@@ -110,9 +110,9 @@ export default function Navbar() {
           <Button asChild variant="ghost" size="sm" className="text-sm">
             <Link to="/login">Login</Link>
           </Button>
-          <Button asChild size="sm" className="text-sm">
+          {/* <Button asChild size="sm" className="text-sm">
             <a href="#">Get Started</a>
-          </Button>
+          </Button> */}
         </div>
       </div>
     </header >
