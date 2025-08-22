@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/popover"
 import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api"
 import { useAppDispatch } from "@/redux/hook"
+import Loader from "@/specialUi/Loader"
 import { Link } from "react-router"
 
 // Navigation links array to be used in both desktop and mobile menus
@@ -26,7 +27,7 @@ const navigationLinks = [
 ]
 
 export default function Navbar() {
-  const { data } = useUserInfoQuery(undefined);
+  const { data, isLoading } = useUserInfoQuery(undefined);
 
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
@@ -35,6 +36,10 @@ export default function Navbar() {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
   };
+
+  if (isLoading) {
+    return <p><Loader /></p>
+  }
 
   return (
     <header className="border-b px-4 md:px-6 container mx-auto max-w-screen-xl border">
