@@ -25,6 +25,9 @@ const navigationLinks = [
   // { href: "#", label: "About" },
   // { href: "#", label: "Contact" },
   // { href: "#", label: "FAQ" },
+  { href: "/admin", label: "Dashboard", role: role.admin },
+  { href: "/admin", label: "Dashboard", role: role.superAdmin },
+  { href: "/agent", label: "Dashboard", role: role.agent },
   { href: "/user", label: "Dashboard", role: role.user },
 ]
 

@@ -8,11 +8,11 @@ import Verify from "@/pages/Verify";
 import type { TRole } from "@/types";
 import { generateRoutes } from "@/utils/generateRoutes";
 import { withAuth } from "@/utils/withAuth";
-
 import { createBrowserRouter, Navigate } from "react-router";
 import { userSidebarItems } from "./userSidebarItems";
 import Unauthorized from "@/pages/Unauthorized";
 import { adminSidebarItems } from "./adminSidebarItems";
+import { agentSidebarItems } from "./agentSidebarItems";
 
 export const router = createBrowserRouter([
     {
@@ -32,6 +32,15 @@ export const router = createBrowserRouter([
         children: [
             { index: true, element: <Navigate to="/admin/analytics" /> },
             ...generateRoutes(adminSidebarItems),
+        ],
+    },
+    // ================= AgentDashBoard====================
+    {
+        Component: withAuth(DashboardLayout, role.agent as TRole),
+        path: "/agent",
+        children: [
+            { index: true, element: <Navigate to="/agent/transaction-history" /> },
+            ...generateRoutes(agentSidebarItems),
         ],
     },
     // ================= User Dashboard ===================

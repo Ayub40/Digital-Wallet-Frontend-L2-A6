@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 
-export type TRole = "SUPER_ADMIN" | "ADMIN" | "USER";
+export type TRole = "SUPER_ADMIN" | "ADMIN" | "AGENT" | "USER";
 
 export interface ISidebarItem {
     title: string;
