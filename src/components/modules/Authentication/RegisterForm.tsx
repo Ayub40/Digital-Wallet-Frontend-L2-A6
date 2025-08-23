@@ -29,6 +29,7 @@ const registerSchema = z
             })
             .max(50),
         email: z.email(),
+        phone: z.string(),
         password: z.string().min(8, { error: "Password is too short" }),
         confirmPassword: z
             .string()
@@ -56,6 +57,7 @@ export function RegisterForm({
         defaultValues: {
             name: "",
             email: "",
+            phone: "",
             password: "",
             confirmPassword: "",
             role: "USER",
@@ -66,6 +68,7 @@ export function RegisterForm({
         const userInfo = {
             name: data.name,
             email: data.email,
+            phone: data.phone,
             password: data.password,
             role: data.role,
         };
@@ -159,6 +162,28 @@ export function RegisterForm({
                                 </FormItem>
                             )}
                         />
+                        {/* Phone Start */}
+                        <FormField
+                            control={form.control}
+                            name="phone"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Phone</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="01XXXXXXXXX"
+                                            type="phone"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription className="sr-only">
+                                        This is your public display name.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        {/* Phone End */}
                         <FormField
                             control={form.control}
                             name="password"
