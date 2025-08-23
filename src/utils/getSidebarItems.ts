@@ -1,10 +1,22 @@
-import type { ISidebarItem } from "@/types";
+import { role } from "@/constants/role";
+import { adminSidebarItems } from "@/routes/adminSidebarItems";
+import { userSidebarItems } from "@/routes/userSidebarItems";
+import type { TRole } from "@/types";
 
-export const generateRoutes = (sidebarItems: ISidebarItem[]) => {
-    return sidebarItems.flatMap((section) =>
-        section.items.map((route) => ({
-            path: route.url,
-            Component: route.component,
-        }))
-    );
+export const getSidebarItems = (userRole: TRole) => {
+    console.log(userRole);
+    console.log(role.superAdmin);
+
+    switch (userRole) {
+        case role.superAdmin:
+            return [...adminSidebarItems];
+        // eta dile superAdmin, adminSidebarItems, userSidebarItems er route golo dekhte parbe
+        // return [...adminSidebarItems, ...userSidebarItems];
+        case role.admin:
+            return [...adminSidebarItems];
+        case role.user:
+            return [...userSidebarItems];
+        default:
+            return [];
+    }
 };
