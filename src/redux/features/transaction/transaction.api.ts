@@ -21,11 +21,21 @@ export const transactionApi = baseApi.injectEndpoints({
             invalidatesTags: ["TRANSACTIONS"],
         }),
 
-    }),
+        getHistory: builder.query({
+            query: () => ({
+                url: "/transaction/get-history",
+                method: "GET"
+            }),
+            providesTags: ["TRANSACTIONS"],
+        }),
 
+        
+    }),
 });
 
 export const {
     useSendMoneyMutation,
-    useWithdrawMoneyMutation
+    useWithdrawMoneyMutation,
+    useGetHistoryQuery
 } = transactionApi;
+

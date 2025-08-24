@@ -16,18 +16,34 @@ import { toast } from "sonner";
 export function UserWithDrawMoney({ className }: React.HTMLAttributes<HTMLDivElement>) {
     const [withdrawMoney, { isLoading }] = useWithdrawMoneyMutation();
 
-    const form = useForm<{ amount: number }>({
-        defaultValues: { amount: 0 },
+    const form = useForm<{ amount: number; agent: string }>({
+        defaultValues: { amount: 0, agent: "" },
     });
 
-    const onSubmit = async (data: { amount: number }) => {
+    const onSubmit = async (data: { amount: number; agent: string }) => {
         try {
-            const result = await withdrawMoney(data).unwrap();
+            const payload = {
+                agent: data.agent,
+                amount: Number(data.amount)
+            }
+
+
+            const result = await withdrawMoney(payload).unwrap();
             console.log(result);
             toast.success("Money withdrawn successfully!");
+            form.reset();
         } catch (error: any) {
             console.error(error);
-            toast.error(error?.data?.message || "Withdraw failed");
+
+            // Error 
+            const message =
+                error?.data?.message ||
+                error?.message ||
+                "Withdraw failed";
+
+            toast.error(message);
+
+            // toast.error(error?.data?.message || "Withdraw failed");
         }
     };
 
@@ -42,6 +58,19 @@ export function UserWithDrawMoney({ className }: React.HTMLAttributes<HTMLDivEle
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+                    <FormField
+                        control={form.control}
+                        name="agent"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Agent Email / Phone</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Enter Agent email or phone" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
                     <FormField
                         control={form.control}
                         name="amount"
