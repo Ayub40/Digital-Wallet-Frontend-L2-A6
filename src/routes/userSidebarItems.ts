@@ -1,5 +1,6 @@
 import { SendMoney } from "@/pages/User/SendMoney";
 import Transaction from "@/pages/User/Transaction";
+import { UserWithDrawMoney } from "@/pages/User/UserWithDrawMoney";
 import type { ISidebarItem } from "@/types";
 
 export const userSidebarItems: ISidebarItem[] = [
@@ -20,6 +21,11 @@ export const userSidebarItems: ISidebarItem[] = [
                 title: "Send Money",
                 url: "/user/send-money",
                 component: SendMoney,
+            },
+            {
+                title: "Withdraw Money",
+                url: "/user/withdraw-money",
+                component: UserWithDrawMoney,
             },
         ]
     }
