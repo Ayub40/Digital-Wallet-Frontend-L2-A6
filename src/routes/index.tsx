@@ -13,6 +13,10 @@ import { userSidebarItems } from "./userSidebarItems";
 import Unauthorized from "@/pages/Unauthorized";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { agentSidebarItems } from "./agentSidebarItems";
+import Features from "@/pages/Public/Features";
+import Pricing from "@/pages/Public/Pricing";
+import About from "@/pages/Public/About";
+import Faq from "@/pages/Public/Faq";
 
 export const router = createBrowserRouter([
     {
@@ -23,11 +27,28 @@ export const router = createBrowserRouter([
                 Component: Homepage,
                 index: true,
             },
+            {
+                Component: Features,
+                path: "features",
+            },
+            {
+                Component: Pricing,
+                path: "pricing",
+            },
+            {
+                Component: About,
+                path: "about",
+            },
+            {
+                Component: Faq,
+                path: "faq",
+            },
         ],
     },
-    // ================ Admin Dashboard ====================
+    // ================ Super-Admin Dashboard ====================
     {
-        Component: withAuth(DashboardLayout, role.superAdmin as TRole),
+        // Component: withAuth(DashboardLayout, role.superAdmin as TRole),
+        Component: withAuth(DashboardLayout, [role.admin as TRole, role.superAdmin as TRole]),
         path: "/admin",
         children: [
             { index: true, element: <Navigate to="/admin/analytics" /> },

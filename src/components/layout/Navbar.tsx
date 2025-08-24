@@ -20,11 +20,10 @@ import { Link } from "react-router"
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
   { href: "/", label: "Home", role: "PUBLIC" },
-  // { href: "#", label: "Features" },
-  // { href: "#", label: "Pricing" },
-  // { href: "#", label: "About" },
-  // { href: "#", label: "Contact" },
-  // { href: "#", label: "FAQ" },
+  { href: "/features", label: "Features", role: "PUBLIC" },
+  { href: "/pricing", label: "Pricing", role: "PUBLIC" },
+  { href: "/about", label: "About", role: "PUBLIC" },
+  { href: "/faq", label: "FAQ", role: "PUBLIC" },
   { href: "/admin", label: "Dashboard", role: role.admin },
   { href: "/admin", label: "Dashboard", role: role.superAdmin },
   { href: "/agent", label: "Dashboard", role: role.agent },
