@@ -73,7 +73,7 @@ export function SendMoney({
                                 <FormItem>
                                     <FormLabel>Receiver (Email or Phone)</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="john@example.com / 017XXXXXXXX" {...field} />
+                                        <Input placeholder="aaa@gmail.com / 017XXXXXXXX" {...field} />
                                     </FormControl>
                                     <FormDescription className="sr-only">
                                         Receiver email or phone

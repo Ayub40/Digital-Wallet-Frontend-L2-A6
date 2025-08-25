@@ -1,18 +1,23 @@
 import { CashIn } from "@/pages/Agent/CashIn";
-import WithdrawMoney from "@/pages/Agent/WithdrawMoney";
+import { CashOut } from "@/pages/Agent/CashOut";
+// import TransactionHistory from "@/pages/TransactionHistory";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
-const AgentTransactionsHistory = lazy(() => import("@/pages/Agent/AgentTransactionsHistory"));
+const TransactionHistory = lazy(() => import("@/pages/TransactionHistory"));
 
 export const agentSidebarItems: ISidebarItem[] = [
     {
         title: "Agent Dashboard",
         items: [
             {
-                title: "Transaction",
-                url: "/agent/transaction-history",
-                component: AgentTransactionsHistory,
+                title: "Transaction History",
+                url: "/agent/transaction-history ",
+                component: TransactionHistory,
+
+                // title: "Transaction",
+                // url: "/agent/transaction-history",
+                // component: AgentTransactionsHistory,
             },
         ],
     },
@@ -25,10 +30,15 @@ export const agentSidebarItems: ISidebarItem[] = [
                 component: CashIn,
             },
             {
-                title: "Withdraw Money",
-                url: "/agent/withdraw-money ",
-                component: WithdrawMoney,
+                title: "Cash Out",
+                url: "/agent/cash-out ",
+                component: CashOut,
             },
+            // {
+            //     title: "Transaction History",
+            //     url: "/agent/transaction-history ",
+            //     component: TransactionHistory,
+            // },
         ],
     },
 ];

@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -14,38 +13,38 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { useAgentCashInMutation } from "@/redux/features/transaction/transaction.api";
+import { useAgentCashOutMutation } from "@/redux/features/transaction/transaction.api";
 
-const cashInSchema = z.object({
+const cashOutSchema = z.object({
     identifier: z.string().min(3, { message: "Email or Phone is required" }),
     amount: z.number().min(1, { message: "Amount must be greater than 0" }),
 });
 
-export function CashIn({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-    const [cashIn, { isLoading }] = useAgentCashInMutation();
+export function CashOut({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+    const [cashOut, { isLoading }] = useAgentCashOutMutation();
 
-    const form = useForm<z.infer<typeof cashInSchema>>({
-        resolver: zodResolver(cashInSchema),
+    const form = useForm<z.infer<typeof cashOutSchema>>({
+        resolver: zodResolver(cashOutSchema),
         defaultValues: {
             identifier: "",
             amount: 0,
         },
     });
 
-    const onSubmit = async (data: z.infer<typeof cashInSchema>) => {
+    const onSubmit = async (data: z.infer<typeof cashOutSchema>) => {
         try {
-            const result = await cashIn(data).unwrap();
-            toast.success(result?.message || "Cash-In successful!");
+            const result = await cashOut(data).unwrap();
+            toast.success(result?.message || "Cash-Out successful!");
             form.reset();
         } catch (error: any) {
-            toast.error(error?.data?.message || "Cash-In failed");
+            toast.error(error?.data?.message || "Cash-Out failed");
         }
     };
 
     return (
         <div className={cn("flex flex-col gap-6 max-w-md mx-auto", className)} {...props}>
             <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">Agent Cash-In</h1>
+                <h1 className="text-2xl font-bold">Agent Cash-Out</h1>
                 <p className="text-sm text-muted-foreground">
                     Enter User Email/Phone and amount
                 </p>
@@ -53,7 +52,6 @@ export function CashIn({ className, ...props }: React.HTMLAttributes<HTMLDivElem
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    {/* Identifier */}
                     <FormField
                         control={form.control}
                         name="identifier"
@@ -68,7 +66,6 @@ export function CashIn({ className, ...props }: React.HTMLAttributes<HTMLDivElem
                         )}
                     />
 
-                    {/* Amount */}
                     <FormField
                         control={form.control}
                         name="amount"
@@ -89,7 +86,7 @@ export function CashIn({ className, ...props }: React.HTMLAttributes<HTMLDivElem
                     />
 
                     <Button type="submit" className="w-full" disabled={isLoading}>
-                        {isLoading ? "Processing..." : "Cash-In"}
+                        {isLoading ? "Processing..." : "Cash-Out"}
                     </Button>
                 </form>
             </Form>

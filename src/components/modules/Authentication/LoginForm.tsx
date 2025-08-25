@@ -65,7 +65,7 @@ export function LoginForm({
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="john@example.com"
+                                            placeholder="aaa@gmail.com"
                                             {...field}
                                             value={field.value || ""}
                                         />
