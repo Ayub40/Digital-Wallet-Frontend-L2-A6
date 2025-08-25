@@ -3,6 +3,8 @@ import { baseApi } from "@/redux/baseApi";
 
 export const transactionApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
+
+        // Send Money
         sendMoney: builder.mutation({
             query: (transactionData) => ({
                 url: "/transaction/send-money",
@@ -12,6 +14,7 @@ export const transactionApi = baseApi.injectEndpoints({
             invalidatesTags: ["TRANSACTIONS"],
         }),
 
+        // WithDraw Money
         withdrawMoney: builder.mutation({
             query: (data: { amount: number }) => ({
                 url: "/transaction/withDrawMoney",
@@ -21,6 +24,7 @@ export const transactionApi = baseApi.injectEndpoints({
             invalidatesTags: ["TRANSACTIONS"],
         }),
 
+        // Transaction History
         getHistory: builder.query({
             query: () => ({
                 url: "/transaction/get-history",
@@ -29,7 +33,27 @@ export const transactionApi = baseApi.injectEndpoints({
             providesTags: ["TRANSACTIONS"],
         }),
 
-        
+        // Agent Cash-In
+        agentCashIn: builder.mutation({
+            query: (data: { identifier: string; amount: number }) => ({
+                url: "/transaction/cash-in",
+                method: "POST",
+                data,
+            }),
+            invalidatesTags: ["TRANSACTIONS"],
+        }),
+
+        // Agent Cash-Out
+        agentCashOut: builder.mutation({
+            query: (data: { identifier: string; amount: number }) => ({
+                url: "/transaction/cash-out",
+                method: "POST",
+                data,
+            }),
+            invalidatesTags: ["TRANSACTIONS"],
+        }),
+
+
     }),
 });
 
