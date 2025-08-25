@@ -1,5 +1,4 @@
-import AddMoney from "@/pages/Agent/AddMoney";
-// import AgentTransactionsHistory from "@/pages/Agent/AgentTransactionsHistory";
+import { CashIn } from "@/pages/Agent/CashIn";
 import WithdrawMoney from "@/pages/Agent/WithdrawMoney";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
@@ -21,20 +20,15 @@ export const agentSidebarItems: ISidebarItem[] = [
         title: "Transaction Management",
         items: [
             {
-                title: "Add Money",
-                url: "/agent/add-money",
-                component: AddMoney,
+                title: "Cash In",
+                url: "/agent/cash-in",
+                component: CashIn,
             },
             {
                 title: "Withdraw Money",
                 url: "/agent/withdraw-money ",
                 component: WithdrawMoney,
             },
-            // {
-            //     title: "Add Tour",
-            //     url: "/admin/add-tour",
-            //     component: AddTour,
-            // },
         ],
     },
 ];

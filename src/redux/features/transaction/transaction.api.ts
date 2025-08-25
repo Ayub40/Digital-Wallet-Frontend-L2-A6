@@ -60,6 +60,8 @@ export const transactionApi = baseApi.injectEndpoints({
 export const {
     useSendMoneyMutation,
     useWithdrawMoneyMutation,
-    useGetHistoryQuery
+    useGetHistoryQuery,
+    useAgentCashInMutation,
+    useAgentCashOutMutation
 } = transactionApi;
 
