@@ -1,3 +1,4 @@
+import { UpdateProfileForm } from "@/pages/UpdateProfile";
 import { SendMoney } from "@/pages/User/SendMoney";
 import UserTransactionHistory from "@/pages/User/UserTransactionHistory";
 import Transaction from "@/pages/User/UserTransactionHistory";
@@ -33,6 +34,17 @@ export const userSidebarItems: ISidebarItem[] = [
                 url: "/user/transaction-history",
                 component: UserTransactionHistory,
             },
+
         ]
-    }
+    },
+    {
+        title: "Setting",
+        items: [
+            {
+                title: "Update Profile",
+                url: "/user/update-profile",
+                component: UpdateProfileForm,
+            },
+        ],
+    },
 ];

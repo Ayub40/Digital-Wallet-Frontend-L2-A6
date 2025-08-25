@@ -27,21 +27,14 @@ export const authApi = baseApi.injectEndpoints({
             }),
         }),
 
-        // sendOtp: builder.mutation<IResponse<null>, ISendOtp>({
-        //     query: (userInfo) => ({
-        //         url: "/otp/send",
-        //         method: "POST",
-        //         data: userInfo,
-        //     }),
-        // }),
-
-        // verifyOtp: builder.mutation<IResponse<null>, IVerifyOtp>({
-        //     query: (userInfo) => ({
-        //         url: "/otp/verify",
-        //         method: "POST",
-        //         data: userInfo,
-        //     }),
-        // }),
+        updateProfile: builder.mutation({
+            query: (payload) => ({
+                url: "/user/update-profile",
+                method: "PATCH",
+                data: payload,
+            }),
+            invalidatesTags: ["USER"],
+        }),
 
         userInfo: builder.query({
             query: () => ({
@@ -50,7 +43,25 @@ export const authApi = baseApi.injectEndpoints({
             }),
             providesTags: ["USER"],
         }),
+
+        changePassword: builder.mutation({
+            query: (payload) => ({
+                url: "/auth/change-password",
+                method: "POST",
+                data: payload,
+            }),
+            invalidatesTags: ["USER"],
+        }),
+
     }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useUserInfoQuery, useLogoutMutation } = authApi;
+export const
+    {
+        useRegisterMutation,
+        useLoginMutation,
+        useUserInfoQuery,
+        useLogoutMutation,
+        useUpdateProfileMutation,
+        useChangePasswordMutation
+    } = authApi;
