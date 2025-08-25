@@ -1,10 +1,13 @@
+// import AgentTransactionsHistory from "@/pages/Agent/AgentTransactionsHistory";
 import { CashIn } from "@/pages/Agent/CashIn";
 import { CashOut } from "@/pages/Agent/CashOut";
+import { UpdateProfileForm } from "@/pages/UpdateProfile";
 // import TransactionHistory from "@/pages/TransactionHistory";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
-const TransactionHistory = lazy(() => import("@/pages/TransactionHistory"));
+// const TransactionHistory = lazy(() => import("@/pages/TransactionHistory"));
+const AgentTransactionsHistory = lazy(() => import("@/pages/Agent/AgentTransactionsHistory"));
 
 export const agentSidebarItems: ISidebarItem[] = [
     {
@@ -12,8 +15,9 @@ export const agentSidebarItems: ISidebarItem[] = [
         items: [
             {
                 title: "Transaction History",
-                url: "/agent/transaction-history ",
-                component: TransactionHistory,
+                url: "/agent/transaction-history",
+                // component: TransactionHistory,
+                component: AgentTransactionsHistory,
 
                 // title: "Transaction",
                 // url: "/agent/transaction-history",
@@ -39,6 +43,16 @@ export const agentSidebarItems: ISidebarItem[] = [
             //     url: "/agent/transaction-history ",
             //     component: TransactionHistory,
             // },
+        ],
+    },
+    {
+        title: "Setting",
+        items: [
+            {
+                title: "Update Profile",
+                url: "/agent/update-profile",
+                component: UpdateProfileForm,
+            },
         ],
     },
 ];
