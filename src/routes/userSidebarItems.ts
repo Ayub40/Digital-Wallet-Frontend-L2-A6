@@ -1,3 +1,4 @@
+import MyProfile from "@/pages/MyProfile";
 import { UpdateProfileForm } from "@/pages/UpdateProfile";
 import { SendMoney } from "@/pages/User/SendMoney";
 import UserTransactionHistory from "@/pages/User/UserTransactionHistory";
@@ -40,6 +41,11 @@ export const userSidebarItems: ISidebarItem[] = [
     {
         title: "Setting",
         items: [
+            {
+                title: "My Profile",
+                url: "/user/my-profile",
+                component: MyProfile,
+            },
             {
                 title: "Update Profile",
                 url: "/user/update-profile",

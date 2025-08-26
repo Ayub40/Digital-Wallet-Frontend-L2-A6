@@ -53,6 +53,32 @@ export const authApi = baseApi.injectEndpoints({
             invalidatesTags: ["USER"],
         }),
 
+        getAllUsers: builder.query({
+            query: () => ({
+                url: "/user/all-users",
+                method: "GET",
+            }),
+            providesTags: ["ADMIN"],
+        }),
+
+        getAllAgents: builder.query({
+            query: () => ({
+                url: "/user/agents",
+                method: "GET",
+            }),
+            providesTags: ["ADMIN"],
+        }),
+
+        // =====================================
+        userStatus: builder.mutation({
+            query: (userId: string) => ({
+                url: `/user/status/${userId}`,
+                method: "PATCH",
+            }),
+            invalidatesTags: ["ADMIN"],
+        }),
+        // =====================================
+
     }),
 });
 
@@ -63,5 +89,8 @@ export const
         useUserInfoQuery,
         useLogoutMutation,
         useUpdateProfileMutation,
-        useChangePasswordMutation
+        useChangePasswordMutation,
+        useGetAllUsersQuery,
+        useGetAllAgentsQuery,
+        useUserStatusMutation
     } = authApi;

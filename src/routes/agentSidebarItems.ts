@@ -1,8 +1,8 @@
 // import AgentTransactionsHistory from "@/pages/Agent/AgentTransactionsHistory";
 import { CashIn } from "@/pages/Agent/CashIn";
 import { CashOut } from "@/pages/Agent/CashOut";
+import MyProfile from "@/pages/MyProfile";
 import { UpdateProfileForm } from "@/pages/UpdateProfile";
-// import TransactionHistory from "@/pages/TransactionHistory";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
@@ -48,6 +48,11 @@ export const agentSidebarItems: ISidebarItem[] = [
     {
         title: "Setting",
         items: [
+            {
+                title: "My Profile",
+                url: "/agent/my-profile",
+                component: MyProfile,
+            },
             {
                 title: "Update Profile",
                 url: "/agent/update-profile",

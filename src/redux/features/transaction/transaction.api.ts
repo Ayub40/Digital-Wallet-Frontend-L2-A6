@@ -53,6 +53,14 @@ export const transactionApi = baseApi.injectEndpoints({
             invalidatesTags: ["TRANSACTIONS"],
         }),
 
+        getAllTransactions: builder.query({
+            query: () => ({
+                url: "/transaction/transactions-history",
+                method: "GET",
+            }),
+            providesTags: ["ADMIN"],
+        }),
+
 
     }),
 });
@@ -62,6 +70,7 @@ export const {
     useWithdrawMoneyMutation,
     useGetHistoryQuery,
     useAgentCashInMutation,
-    useAgentCashOutMutation
+    useAgentCashOutMutation,
+    useGetAllTransactionsQuery
 } = transactionApi;
 
