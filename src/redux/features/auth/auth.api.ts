@@ -61,7 +61,7 @@ export const authApi = baseApi.injectEndpoints({
             providesTags: ["ADMIN"],
         }),
 
-        getAllAgents: builder.query({
+        getAllAgents: builder.query<any, void>({
             query: () => ({
                 url: "/user/agents",
                 method: "GET",
@@ -69,7 +69,6 @@ export const authApi = baseApi.injectEndpoints({
             providesTags: ["ADMIN"],
         }),
 
-        // =====================================
         userStatus: builder.mutation({
             query: (userId: string) => ({
                 url: `/user/status/${userId}`,
@@ -77,7 +76,32 @@ export const authApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["ADMIN"],
         }),
-        // =====================================
+
+        updateUserRole: builder.mutation({
+            query: ({ userId, role }) => ({
+                url: `/user/role/${userId}`,
+                method: "PATCH",
+                data: { role },
+            }),
+            invalidatesTags: ["ADMIN"],
+        }),
+
+        getSingleUser: builder.query({
+            query: (userId: string) => ({
+                url: `/user/${userId}`,
+                method: "GET",
+            }),
+            providesTags: ["ADMIN"],
+        }),
+
+        agentApproval: builder.mutation<any, string>({
+            // query: (userId: string) => ({
+            query: (userId) => ({
+                url: `/user/agent/approve-suspend/${userId}`,
+                method: "PATCH",
+            }),
+            invalidatesTags: ["ADMIN"],
+        }),
 
     }),
 });
@@ -92,5 +116,9 @@ export const
         useChangePasswordMutation,
         useGetAllUsersQuery,
         useGetAllAgentsQuery,
-        useUserStatusMutation
+        useUserStatusMutation,
+        useUpdateUserRoleMutation,
+        useGetSingleUserQuery,
+        useAgentApprovalMutation,
+        useLazyGetAllAgentsQuery
     } = authApi;

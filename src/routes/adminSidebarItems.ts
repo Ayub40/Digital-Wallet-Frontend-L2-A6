@@ -1,5 +1,6 @@
+// import AllUser from "@/pages/Admin/AllUser";
 import ManageAgents from "@/pages/Admin/ManageAgents";
-// import ManageUsers from "@/pages/Admin/ManageUsers";
+import ManageUsers from "@/pages/Admin/ManageUsers";
 import ViewTransactions from "@/pages/Admin/ViewTransactions";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
@@ -21,11 +22,11 @@ export const adminSidebarItems: ISidebarItem[] = [
     {
         title: "Project Management",
         items: [
-            // {
-            //     title: "Manage Users",
-            //     url: "/admin/manage-users",
-            //     component: ManageUsers,
-            // },
+            {
+                title: "Manage Users",
+                url: "/admin/manage-users",
+                component: ManageUsers,
+            },
             {
                 title: "Manage Agents",
                 url: "/admin/manage-agents",
@@ -36,6 +37,11 @@ export const adminSidebarItems: ISidebarItem[] = [
                 url: "/admin/view-transactions",
                 component: ViewTransactions,
             },
+            // {
+            //     title: "All User",
+            //     url: "/admin/all-user",
+            //     component: AllUser,
+            // },
         ],
     },
 ];

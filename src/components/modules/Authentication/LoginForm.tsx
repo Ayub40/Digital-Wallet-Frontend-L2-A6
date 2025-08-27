@@ -12,6 +12,7 @@ import Password from "@/components/ui/Password";
 import config from "@/config";
 import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -23,6 +24,7 @@ export function LoginForm({
     const navigate = useNavigate();
     const form = useForm();
     const [login] = useLoginMutation();
+
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         try {
             const res = await login(data).unwrap();
@@ -31,17 +33,33 @@ export function LoginForm({
             if (res.success) {
                 toast.success("Logged in successfully");
                 navigate("/");
-            }
-        } catch (err) {
-            console.error(err);
 
-            if (err.data.message === "Password does not match") {
+                // if (res.data.role === "AGENT") {
+                //     navigate("/agent");
+                // } else if (res.data.role === "USER") {
+                //     navigate("/user");
+                // } else if (res.data.role === "ADMIN" || res.data.role === "SUPER_ADMIN") {
+                //     navigate("/admin");
+                // }
+            }
+
+        } catch (err) {
+            const typedErr = err as FetchBaseQueryError & { data?: { message?: string } };
+
+            console.error(typedErr);
+
+            if (typedErr.data?.message === "Password does not match") {
                 toast.error("Invalid credentials");
             }
 
-            if (err.data.message === "User is not verified") {
+            if (typedErr.data?.message === "User is not verified") {
                 toast.error("Your account is not verified");
                 navigate("/verify", { state: data.email });
+            }
+
+            if (typedErr.data?.message === "User is BLOCKED") {
+                toast.error("Your account is blocked");
+                navigate("/unauthorized");
             }
         }
     };

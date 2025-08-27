@@ -11,6 +11,11 @@ export const withAuth = (Component: ComponentType, requiredRoles?: TRole | TRole
             return <Navigate to="/login" />;
         }
 
+        // Blocked user check
+        if (!isLoading && data?.data?.isBlocked) {
+            return <Navigate to="/unauthorized" />;
+        }
+
         // single role handle
         if (typeof requiredRoles === "string") {
             if (!isLoading && requiredRoles !== data?.data?.role) {
