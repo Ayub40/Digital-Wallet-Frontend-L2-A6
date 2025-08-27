@@ -54,11 +54,14 @@ export const transactionApi = baseApi.injectEndpoints({
         }),
 
         getAllTransactions: builder.query({
-            query: () => ({
+            query: (params) => ({
                 url: "/transaction/transactions-history",
                 method: "GET",
+                params
             }),
             providesTags: ["ADMIN"],
+            // transformResponse: (response) => response.data,
+            transformResponse: (response) => response
         }),
 
 

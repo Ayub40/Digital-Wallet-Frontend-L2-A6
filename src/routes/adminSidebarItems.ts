@@ -2,6 +2,8 @@
 import ManageAgents from "@/pages/Admin/ManageAgents";
 import ManageUsers from "@/pages/Admin/ManageUsers";
 import ViewTransactions from "@/pages/Admin/ViewTransactions";
+import MyProfile from "@/pages/MyProfile";
+import { UpdateProfileForm } from "@/pages/UpdateProfile";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
@@ -38,10 +40,25 @@ export const adminSidebarItems: ISidebarItem[] = [
                 component: ViewTransactions,
             },
             // {
-            //     title: "All User",
-            //     url: "/admin/all-user",
-            //     component: AllUser,
+            //     title: "Update Profile",
+            //     url: "/admin/update-profile",
+            //     component: UpdateProfileForm,
             // },
+        ],
+    },
+    {
+        title: "Setting",
+        items: [
+            {
+                title: "My Profile",
+                url: "/admin/my-profile",
+                component: MyProfile,
+            },
+            {
+                title: "Update Profile",
+                url: "/admin/update-profile",
+                component: UpdateProfileForm,
+            },
         ],
     },
 ];
