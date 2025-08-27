@@ -3,7 +3,7 @@ import Logo from "@/assets/icons/Logo";
 export default function Footer() {
     return (
         <footer className="bg-white">
-            <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+            <div className="mx-auto max-w-screen-xl space-y-5 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                     <div>
                         <div className="text-teal-600 flex gap-4">
@@ -129,13 +129,7 @@ export default function Footer() {
                                     <a href="#" className="text-gray-700 transition hover:opacity-75"> Accounts Review </a>
                                 </li>
 
-                                <li>
-                                    <a href="#" className="text-gray-700 transition hover:opacity-75"> HR Consulting </a>
-                                </li>
-
-                                <li>
-                                    <a href="#" className="text-gray-700 transition hover:opacity-75"> SEO Optimisation </a>
-                                </li>
+                             
                             </ul>
                         </div>
 
@@ -191,17 +185,13 @@ export default function Footer() {
                                     <a href="#" className="text-gray-700 transition hover:opacity-75"> Refund Policy </a>
                                 </li>
 
-                                <li>
-                                    <a href="#" className="text-gray-700 transition hover:opacity-75">
-                                        Hiring-3 Statistics
-                                    </a>
-                                </li>
+                              
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <p className="text-xs text-gray-500">&copy; 2022. Company Name. All rights reserved.</p>
+                {/* <p className="text-xs text-gray-500">&copy; 2022. Company Name. All rights reserved.</p> */}
             </div>
         </footer>
     );
