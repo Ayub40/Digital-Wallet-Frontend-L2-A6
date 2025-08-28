@@ -26,11 +26,13 @@ export const transactionApi = baseApi.injectEndpoints({
 
         // Transaction History
         getHistory: builder.query({
-            query: () => ({
+            query: (params) => ({
                 url: "/transaction/get-history",
-                method: "GET"
+                method: "GET",
+                params
             }),
             providesTags: ["TRANSACTIONS"],
+            transformResponse: (response) => response
         }),
 
         // Agent Cash-In

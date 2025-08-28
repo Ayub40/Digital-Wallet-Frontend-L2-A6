@@ -1,8 +1,7 @@
 import MyProfile from "@/pages/MyProfile";
+import TransactionHistory from "@/pages/TransactionHistory";
 import { UpdateProfileForm } from "@/pages/UpdateProfile";
 import { SendMoney } from "@/pages/User/SendMoney";
-import UserTransactionHistory from "@/pages/User/UserTransactionHistory";
-import Transaction from "@/pages/User/UserTransactionHistory";
 import { UserWithDrawMoney } from "@/pages/User/UserWithDrawMoney";
 import type { ISidebarItem } from "@/types";
 
@@ -13,7 +12,7 @@ export const userSidebarItems: ISidebarItem[] = [
             {
                 title: "Transaction",
                 url: "/user/transaction",
-                component: Transaction,
+                component: TransactionHistory
             },
         ],
     },
@@ -30,12 +29,6 @@ export const userSidebarItems: ISidebarItem[] = [
                 url: "/user/withdraw-money",
                 component: UserWithDrawMoney,
             },
-            {
-                title: "Transaction History",
-                url: "/user/transaction-history",
-                component: UserTransactionHistory,
-            },
-
         ]
     },
     {
