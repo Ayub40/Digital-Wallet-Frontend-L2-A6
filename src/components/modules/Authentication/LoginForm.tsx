@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Password from "@/components/ui/Password";
-import config from "@/config";
+// import config from "@/config";
 import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
@@ -126,14 +126,14 @@ export function LoginForm({
                 </div>
 
                 {/*//* http://localhost:5000/api/v1/auth/google */}
-                <Button
+                {/* <Button
                     onClick={() => window.open(`${config.baseUrl}/auth/google`)}
                     type="button"
                     variant="outline"
                     className="w-full cursor-pointer"
                 >
                     Login with Google
-                </Button>
+                </Button> */}
             </div>
             <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
