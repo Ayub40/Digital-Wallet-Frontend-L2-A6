@@ -39,11 +39,6 @@ export const adminSidebarItems: ISidebarItem[] = [
                 url: "/admin/view-transactions",
                 component: ViewTransactions,
             },
-            // {
-            //     title: "Update Profile",
-            //     url: "/admin/update-profile",
-            //     component: UpdateProfileForm,
-            // },
         ],
     },
     {

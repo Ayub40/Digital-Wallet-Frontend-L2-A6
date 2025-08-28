@@ -1,41 +1,64 @@
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { useState, useEffect } from "react";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
+    TableCaption,
 } from "@/components/ui/table";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination";
+import { Loader2 } from "lucide-react";
+
 import { useGetAllTransactionsQuery } from "@/redux/features/transaction/transaction.api";
-import { useState } from "react";
+import { useSearchParams } from "react-router";
 
-export default function ViewTransactions() {
-    {/* For Pagination */ }
+export default function ViewAllTransactions() {
     const [currentPage, setCurrentPage] = useState(1);
-    const [limit, setLimit] = useState(5);
+    const [limit] = useState(10);
+    const [searchParams] = useSearchParams();
 
-    console.log(currentPage);
+    const { data, isLoading, isError } = useGetAllTransactionsQuery({
+        page: currentPage,
+        limit,
+        type: searchParams.get("type") || undefined,
+        status: searchParams.get("status") || undefined,
+        startDate: searchParams.get("startDate") || undefined,
+        endDate: searchParams.get("endDate") || undefined,
+        minAmount: searchParams.get("minAmount") || undefined,
+        maxAmount: searchParams.get("maxAmount") || undefined,
+        search: searchParams.get("search") || undefined,
+    });
 
-    const { data, isLoading, isError } = useGetAllTransactionsQuery({ page: currentPage, limit });
     console.log(data);
 
     const transactions = data?.data || [];
-
-    // For Pagination
     const totalPage = data?.meta?.totalPage || 1;
 
-    if (isLoading) return <p>Loading transactions...</p>;
-    if (isError) return <p>Failed to load transactions.</p>;
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchParams]);
+
+    if (isLoading) return <div className="flex items-center justify-center h-40"><Loader2 className="animate-spin" /> Loading...</div>;
+    if (isError) return <p className="text-red-500">Failed to load transactions.</p>;
+
 
     return (
-        <div className="p-4">
-            <h1 className="text-xl font-semibold mb-4">Transaction History</h1>
+        <div className="p-4 space-y-4">
+            <h1 className="text-xl font-semibold">All Transactions</h1>
+            {/* <TransactionFiltersAdmin /> */}
 
-            <div>
+            <div className="overflow-x-auto">
                 <Table>
-                    <TableCaption>List of your recent transactions.</TableCaption>
+                    <TableCaption>Transaction listing with filters & pagination.</TableCaption>
                     <TableHeader>
                         <TableRow>
                             <TableHead>Sender</TableHead>
@@ -60,57 +83,43 @@ export default function ViewTransactions() {
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={6} className="text-center">
+                                <TableCell colSpan={6} className="text-center text-gray-500">
                                     No transactions found
                                 </TableCell>
                             </TableRow>
                         )}
-                    </TableBody>
+                    </TableBody>          
                 </Table>
             </div>
-            {/* For Pagination */}
+
             {totalPage > 1 && (
                 <div className="flex justify-end mt-4">
-                    <div>
-                        <Pagination>
-                            <PaginationContent>
-                                <PaginationItem>
-                                    <PaginationPrevious
-                                        onClick={() => setCurrentPage((prev) => prev - 1)}
-                                        className={
-                                            currentPage === 1
-                                                ? "pointer-events-none opacity-50"
-                                                : "cursor-pointer"
-                                        }
-                                    />
+                    <Pagination>
+                        <PaginationContent>
+                            <PaginationItem>
+                                <PaginationPrevious
+                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                    className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                                />
+                            </PaginationItem>
+
+                            {Array.from({ length: totalPage }, (_, i) => i + 1).map(page => (
+                                <PaginationItem key={page} onClick={() => setCurrentPage(page)}>
+                                    <PaginationLink isActive={currentPage === page}>{page}</PaginationLink>
                                 </PaginationItem>
-                                {Array.from({ length: totalPage }, (_, index) => index + 1).map(
-                                    (page) => (
-                                        <PaginationItem
-                                            key={page}
-                                            onClick={() => setCurrentPage(page)}
-                                        >
-                                            <PaginationLink isActive={currentPage === page}>
-                                                {page}
-                                            </PaginationLink>
-                                        </PaginationItem>
-                                    )
-                                )}
-                                <PaginationItem>
-                                    <PaginationNext
-                                        onClick={() => setCurrentPage((prev) => prev + 1)}
-                                        className={
-                                            currentPage === totalPage
-                                                ? "pointer-events-none opacity-50"
-                                                : "cursor-pointer"
-                                        }
-                                    />
-                                </PaginationItem>
-                            </PaginationContent>
-                        </Pagination>
-                    </div>
+                            ))}
+
+                            <PaginationItem>
+                                <PaginationNext
+                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPage))}
+                                    className={currentPage === totalPage ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                                />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
                 </div>
             )}
         </div>
     );
 }
+
