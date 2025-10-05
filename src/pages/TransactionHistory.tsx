@@ -46,7 +46,7 @@ export default function TransactionHistory() {
     const transactions = data?.data || [];
     const totalPage = data?.meta?.totalPage || 1;
 
-    // Filter change হলে page 1 এ reset
+    // Filter change hole page 1 এ reset
     useEffect(() => {
         setCurrentPage(1);
     }, [searchParams]);

@@ -228,14 +228,6 @@ export function RegisterForm({
                         Or continue with
                     </span>
                 </div>
-
-                {/* <Button
-                    type="button"
-                    variant="outline"
-                    className="w-full cursor-pointer"
-                >
-                    Login with Google
-                </Button> */}
             </div>
 
             <div className="text-center text-sm">

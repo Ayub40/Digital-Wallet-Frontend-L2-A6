@@ -88,7 +88,7 @@ export default function ViewAllTransactions() {
                                 </TableCell>
                             </TableRow>
                         )}
-                    </TableBody>          
+                    </TableBody>
                 </Table>
             </div>
 

@@ -14,9 +14,8 @@ import {
 import { role } from "@/constants/role"
 import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api"
 import { useAppDispatch } from "@/redux/hook"
-// import Loader from "@/specialUi/Loader"
-import { Link } from "react-router"
 import { ModeToggle } from "./ModeToggler"
+import { Link } from "react-router-dom"
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -43,10 +42,6 @@ export default function Navbar() {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
   };
-
-  // if (isLoading) {
-  //   return <p><Loader /></p>
-  // }
 
   return (
     <header className="border-b px-4 md:px-6 container mx-auto">

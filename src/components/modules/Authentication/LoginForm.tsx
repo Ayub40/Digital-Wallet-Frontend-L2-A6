@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Password from "@/components/ui/Password";
-// import config from "@/config";
 import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
@@ -33,14 +32,6 @@ export function LoginForm({
             if (res.success) {
                 toast.success("Logged in successfully");
                 navigate("/");
-
-                // if (res.data.role === "AGENT") {
-                //     navigate("/agent");
-                // } else if (res.data.role === "USER") {
-                //     navigate("/user");
-                // } else if (res.data.role === "ADMIN" || res.data.role === "SUPER_ADMIN") {
-                //     navigate("/admin");
-                // }
             }
 
         } catch (err) {
@@ -99,13 +90,7 @@ export function LoginForm({
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                        {/* <Input
-                                            type="password"
-                                            placeholder="********"
-                                            {...field}
-                                            value={field.value || ""}
-                                        /> */}
+                                    <FormControl> 
                                         <Password {...field} />
                                     </FormControl>
                                     <FormMessage />
@@ -124,16 +109,6 @@ export function LoginForm({
                         Or continue with
                     </span>
                 </div>
-
-                {/*//* http://localhost:5000/api/v1/auth/google */}
-                {/* <Button
-                    onClick={() => window.open(`${config.baseUrl}/auth/google`)}
-                    type="button"
-                    variant="outline"
-                    className="w-full cursor-pointer"
-                >
-                    Login with Google
-                </Button> */}
             </div>
             <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
