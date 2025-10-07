@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGetAllAgentsQuery, useGetAllUsersQuery } from "@/redux/features/auth/auth.api";
 import { useGetAllTransactionsQuery } from "@/redux/features/transaction/transaction.api";
