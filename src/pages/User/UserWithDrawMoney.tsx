@@ -21,6 +21,10 @@ export function UserWithDrawMoney({ className }: React.HTMLAttributes<HTMLDivEle
     });
 
     const onSubmit = async (data: { amount: number; agent: string }) => {
+        if (!data.agent) {
+            return toast.error("Please enter an Agent's email or phone");
+        }
+
         try {
             const payload = {
                 agent: data.agent,
