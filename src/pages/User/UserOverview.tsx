@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Loader2, Send, ArrowDownCircle, ArrowUpCircle } from "lucide-react";
+import { Loader2, Send, ArrowUpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import moment from "moment";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
@@ -19,7 +19,6 @@ export default function UserOverview() {
     });
 
     const {
-        data: transactionsData,
         isLoading: txLoading,
         refetch: refetchTx
     } = useGetHistoryQuery(
@@ -36,7 +35,7 @@ export default function UserOverview() {
     }, []);
 
     const user = userData?.data;
-    const transactions = transactionsData?.data?.result || [];
+
 
     if (userLoading || txLoading) {
         return (
@@ -62,18 +61,18 @@ export default function UserOverview() {
             </div>
 
             {/* Quick Actions */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <Button
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* <Button
                     onClick={() => navigate("/user/add-money")}
                     className="w-full flex items-center justify-center gap-2 py-6 text-lg rounded-xl"
                 >
                     <ArrowDownCircle size={20} /> Add Money
-                </Button>
+                </Button> */}
                 <Button
                     onClick={() => navigate("/user/withdraw-money")}
                     className="w-full flex items-center justify-center gap-2 py-6 text-lg rounded-xl bg-yellow-500 hover:bg-yellow-600"
                 >
-                    <ArrowUpCircle size={20} /> Withdraw
+                    <ArrowUpCircle size={20} /> Withdraw Money
                 </Button>
                 <Button
                     onClick={() => navigate("/user/send-money")}

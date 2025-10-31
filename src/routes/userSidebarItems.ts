@@ -1,7 +1,7 @@
 import MyProfile from "@/pages/MyProfile";
 import TransactionHistory from "@/pages/TransactionHistory";
 import { UpdateProfileForm } from "@/pages/UpdateProfile";
-import AddMoney from "@/pages/User/AddMoney";
+// import AddMoney from "@/pages/User/AddMoney";
 import { SendMoney } from "@/pages/User/SendMoney";
 import UserOverview from "@/pages/User/UserOverview";
 import { UserWithDrawMoney } from "@/pages/User/UserWithDrawMoney";
@@ -27,11 +27,11 @@ export const userSidebarItems: ISidebarItem[] = [
     {
         title: "User Action",
         items: [
-            {
-                title: "Add Money",
-                url: "/user/add-money",
-                component: AddMoney,
-            },
+            // {
+            //     title: "Add Money",
+            //     url: "/user/add-money",
+            //     component: AddMoney,
+            // },
             {
                 title: "Send Money",
                 url: "/user/send-money",
