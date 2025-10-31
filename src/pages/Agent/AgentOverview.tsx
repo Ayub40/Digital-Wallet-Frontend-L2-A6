@@ -41,10 +41,11 @@ export default function AgentOverview() {
     return (
         <div className="space-y-6">
             {/* Summary Section - Single Row */}
+            <h1 className="dark:text-white text-center text-4xl font-bold">Agent Overview</h1>
             <div className="flex flex-col md:flex-row gap-6">
                 <Card className="flex-1 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300">
                     <CardHeader>
-                        <CardTitle className="text-lg font-semibold text-gray-700">Cash-In Total</CardTitle>
+                        <CardTitle className="text-lg font-semibold text-gray-700 dark:text-white">Cash-In Total</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <p className="text-3xl font-bold text-green-600">{cashInTotal} $</p>
@@ -53,7 +54,7 @@ export default function AgentOverview() {
 
                 <Card className="flex-1 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300">
                     <CardHeader>
-                        <CardTitle className="text-lg font-semibold text-gray-700">Cash-Out Total</CardTitle>
+                        <CardTitle className="text-lg font-semibold text-gray-700 dark:text-white">Cash-Out Total</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <p className="text-3xl font-bold text-red-600">{cashOutTotal} $</p>
@@ -64,7 +65,7 @@ export default function AgentOverview() {
             {/* Transaction History Section - Below Summary */}
             <Card className="rounded-2xl shadow-lg border border-gray-200 p-5">
                 <CardHeader>
-                    <CardTitle className="text-4xl font-bold text-gray-700 text-center">Recent Activity</CardTitle>
+                    <CardTitle className="text-4xl font-bold text-gray-700 text-center dark:text-white">Recent Activity</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <TransactionHistory />
