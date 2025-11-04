@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { Loader2, Send, ArrowUpCircle } from "lucide-react";
+import { Send, ArrowUpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import moment from "moment";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useGetHistoryQuery } from "@/redux/features/transaction/transaction.api";
 import { useEffect } from "react";
 import TransactionHistory from "../TransactionHistory";
+import Loader from "@/specialUi/Loader";
 
 export default function UserOverview() {
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function UserOverview() {
     if (userLoading || txLoading) {
         return (
             <div className="flex justify-center items-center h-[80vh]">
-                <Loader2 className="animate-spin w-8 h-8 text-primary" />
+                <Loader />
             </div>
         );
     }

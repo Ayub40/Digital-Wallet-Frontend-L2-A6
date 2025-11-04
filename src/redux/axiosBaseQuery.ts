@@ -1,6 +1,7 @@
 import { axiosInstance } from "@/lib/axios";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosError, AxiosRequestConfig } from "axios";
+import { toast } from "sonner";
 
 const axiosBaseQuery =
     (): BaseQueryFn<
@@ -26,6 +27,16 @@ const axiosBaseQuery =
                 return { data: result.data };
             } catch (axiosError) {
                 const err = axiosError as AxiosError;
+
+                // New Code
+                // Global Error Toast Here
+                const message =
+                    (err.response?.data as any)?.message ||
+                    err.message ||
+                    "Something went wrong!";
+                toast.error(message);
+                // End New Code
+
                 return {
                     error: {
                         status: err.response?.status,

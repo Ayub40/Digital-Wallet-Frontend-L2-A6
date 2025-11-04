@@ -81,6 +81,15 @@ export function RegisterForm({
             // navigate("/login");
         } catch (error) {
             console.error(error);
+
+            // Global error handling from backend or network
+            // const err = error as any;
+            // const errorMessage =
+            //     err?.data?.message ||
+            //     err?.message ||
+            //     "Something went wrong. Please try again!";
+            // toast.error(errorMessage);
+            // console.error("Register Error:", err);
         }
     };
 

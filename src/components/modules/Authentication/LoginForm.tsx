@@ -31,7 +31,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
     const navigate = useNavigate();
     const [login, { isLoading }] = useLoginMutation();
-    
+
     const [loadingAfterLogin, setLoadingAfterLogin] = useState(false);
 
     const form = useForm<LoginFormValues>({
@@ -50,23 +50,34 @@ export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivE
                 setLoadingAfterLogin(true);
                 toast.success("Logged in successfully");
                 navigate("/");
+                // setTimeout(() => {
+                //     navigate("/");
+                // }, 1000);
             }
         } catch (err) {
             const typedErr = err as FetchBaseQueryError & { data?: { message?: string } };
             console.error(typedErr);
 
 
-            if (typedErr.data?.message === "Password does not match") {
-                toast.error("Invalid credentials");
-            }
+            // if (typedErr.data?.message === "Password does not match") {
+            //     toast.error("Invalid credentials");
+            // }
+
+            // Global-level error handling using message
+            const message =
+                typedErr?.data?.message ||
+                "Something went wrong! Please try again.";
+
+            toast.error(message);
+            // End Global-level error handling
 
             if (typedErr.data?.message === "User is not verified") {
-                toast.error("Your account is not verified");
+                // toast.error("Your account is not verified");
                 navigate("/verify", { state: data.email });
             }
 
             if (typedErr.data?.message === "User is BLOCKED") {
-                toast.error("Your account is blocked");
+                // toast.error("Your account is blocked");
                 navigate("/unauthorized");
             }
         }
