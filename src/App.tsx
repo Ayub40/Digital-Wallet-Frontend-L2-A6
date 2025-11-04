@@ -6,11 +6,12 @@ import { adminSidebarItems } from './routes/adminSidebarItems';
 function App() {
   console.log(generateRoutes(adminSidebarItems));
 
+
   return (
     <>
       <CommonLayout>
         <Outlet />
-      </CommonLayout>
+      </CommonLayout >
     </>
   )
 }

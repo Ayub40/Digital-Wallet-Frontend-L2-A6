@@ -32,6 +32,7 @@ import {
     useUpdateUserRoleMutation,
     useGetSingleUserQuery,
 } from "@/redux/features/auth/auth.api";
+import Loader from "@/specialUi/Loader";
 
 export default function AllUser() {
     const { data: usersRes, isLoading, refetch } = useGetAllUsersQuery({});
@@ -74,7 +75,13 @@ export default function AllUser() {
         }
     };
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-40 text-gray-600">
+                <Loader />
+            </div>
+        );
+    }
 
     return (
         <div>

@@ -16,6 +16,8 @@ import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/a
 import { useAppDispatch } from "@/redux/hook"
 import { ModeToggle } from "./ModeToggler"
 import { Link } from "react-router-dom"
+import Loader from "@/specialUi/Loader"
+
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -32,7 +34,7 @@ const navigationLinks = [
 
 export default function Navbar() {
   // const { data, isLoading } = useUserInfoQuery(undefined);
-  const { data } = useUserInfoQuery(undefined);
+  const { data, isLoading } = useUserInfoQuery(undefined);
   console.log(data?.data);
 
   const [logout] = useLogoutMutation();
@@ -42,6 +44,12 @@ export default function Navbar() {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
   };
+
+  
+  if (isLoading) {
+    return <Loader />;
+  }
+
 
   return (
     <header className="border-b px-4 md:px-6 container mx-auto">

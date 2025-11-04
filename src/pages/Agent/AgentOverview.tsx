@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGetHistoryQuery } from "@/redux/features/transaction/transaction.api";
-import { Loader2 } from "lucide-react";
+// import { Loader2 } from "lucide-react";
 import TransactionHistory from "../TransactionHistory";
+import Loader from "@/specialUi/Loader";
 
 export default function AgentOverview() {
     const { data: txRes, isLoading, isError } = useGetHistoryQuery(undefined);
@@ -10,7 +11,8 @@ export default function AgentOverview() {
     if (isLoading) {
         return (
             <div className="flex justify-center items-center h-40 text-gray-600">
-                <Loader2 className="animate-spin h-6 w-6 mr-2" />
+                {/* <Loader2 className="animate-spin h-6 w-6 mr-2" /> */}
+                <Loader />
                 Loading Overview...
             </div>
         );

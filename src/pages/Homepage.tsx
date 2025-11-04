@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion"
 
 export default function HeroSection() {
+
     return (
         <section className="relative w-full bg-gradient-to-r from-primary via-secondary to-accent text-foreground transition-colors max-w-screen-xl mx-auto container rounded-2xl">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-between py-20 px-6">

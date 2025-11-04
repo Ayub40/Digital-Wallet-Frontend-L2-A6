@@ -20,6 +20,7 @@ import { Loader2 } from "lucide-react";
 
 import { useGetAllTransactionsQuery } from "@/redux/features/transaction/transaction.api";
 import { useSearchParams } from "react-router";
+import Loader from "@/specialUi/Loader";
 
 export default function ViewAllTransactions() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -47,7 +48,13 @@ export default function ViewAllTransactions() {
         setCurrentPage(1);
     }, [searchParams]);
 
-    if (isLoading) return <div className="flex items-center justify-center h-40"><Loader2 className="animate-spin" /> Loading...</div>;
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-40 text-gray-600">
+                <Loader />
+            </div>
+        );
+    }
     if (isError) return <p className="text-red-500">Failed to load transactions.</p>;
 
 

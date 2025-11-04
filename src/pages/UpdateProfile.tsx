@@ -20,6 +20,7 @@ import {
 } from "@/redux/features/auth/auth.api";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Loader from "@/specialUi/Loader";
 
 const profileSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -83,7 +84,10 @@ export function UpdateProfileForm({
         }
     };
 
-    if (isLoading) return <div>Loading...</div>;
+    // if (isLoading) return <div>Loading...</div>;
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <div

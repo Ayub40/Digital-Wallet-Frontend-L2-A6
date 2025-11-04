@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+import Loader from "@/specialUi/Loader";
 import { Link } from "react-router";
 // import { BorderBeam } from "@/components/magicui/border-beam";
 
@@ -12,7 +13,13 @@ const MyProfile = () => {
         refetchOnMountOrArgChange: true,
     });
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-40 text-gray-600">
+                <Loader />
+            </div>
+        );
+    }
     if (isError) return <p>Failed to load profile</p>;
 
     const user = data?.data;

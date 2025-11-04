@@ -17,6 +17,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
+import { useState } from "react";
+import Loader from "@/specialUi/Loader";
 
 
 const loginSchema = z.object({
@@ -29,6 +31,8 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
     const navigate = useNavigate();
     const [login, { isLoading }] = useLoginMutation();
+    
+    const [loadingAfterLogin, setLoadingAfterLogin] = useState(false);
 
     const form = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
@@ -43,6 +47,7 @@ export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivE
             const res = await login(data).unwrap();
 
             if (res.success) {
+                setLoadingAfterLogin(true);
                 toast.success("Logged in successfully");
                 navigate("/");
             }
@@ -66,6 +71,12 @@ export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivE
             }
         }
     };
+
+    if (loadingAfterLogin) {
+        return <Loader />;
+    }
+
+
 
     return (
         <div className={cn("max-w-md mx-auto flex flex-col gap-6", className)} {...props}>

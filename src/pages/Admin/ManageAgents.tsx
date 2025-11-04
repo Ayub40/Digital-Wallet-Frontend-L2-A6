@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { useGetAllAgentsQuery, useAgentApprovalMutation, useGetSingleUserQuery } from "@/redux/features/auth/auth.api";
+import Loader from "@/specialUi/Loader";
 
 export default function ManageAgents() {
     // const { data: agentsRes, isLoading, refetch } = useGetAllAgentsQuery({});
@@ -72,7 +73,13 @@ export default function ManageAgents() {
     //     }
     // };
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center h-40 text-gray-600">
+                <Loader />
+            </div>
+        );
+    }
 
     return (
         <div>
