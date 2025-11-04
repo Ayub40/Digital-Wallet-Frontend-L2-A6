@@ -13,7 +13,7 @@ export default function AgentOverview() {
             <div className="flex justify-center items-center h-40 text-gray-600">
                 {/* <Loader2 className="animate-spin h-6 w-6 mr-2" /> */}
                 <Loader />
-                Loading Overview...
+                {/* Loading Overview... */}
             </div>
         );
     }

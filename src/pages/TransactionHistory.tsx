@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Loader2 } from "lucide-react";
 import TransactionUser from "./AdvancedFilter/TransactionUser";
 
 import {
@@ -24,6 +23,7 @@ import {
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useGetHistoryQuery } from "@/redux/features/transaction/transaction.api";
 import { useSearchParams } from "react-router";
+import Loader from "@/specialUi/Loader";
 
 export default function TransactionHistory() {
     const [searchParams] = useSearchParams();
@@ -52,9 +52,9 @@ export default function TransactionHistory() {
     if (isLoading) {
         return (
             <div className="flex items-center justify-center h-40 dark:bg-gray-900 dark:text-gray-200">
-                <Loader2 className="animate-spin h-6 w-6 text-gray-500 dark:text-gray-300" />
+                <Loader />
                 <span className="ml-2 text-gray-600 dark:text-gray-400">
-                    Loading transactions...
+                    {/* Loading transactions... */}
                 </span>
             </div>
         );
