@@ -101,7 +101,7 @@ The Digital Wallet Frontend is a modern, secure, and user-friendly web applicati
    Create a `.env.local` file in the root directory and add your environment variables:
 
    ```env
- VITE_BASE_URL=https://digital-wallet-server-l2-a5.vercel.app/api/v1
+ VITE_BASE_URL=your_base_url
    # Add other environment variables as needed
    ```
 
