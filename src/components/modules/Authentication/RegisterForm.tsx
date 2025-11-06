@@ -29,7 +29,13 @@ const registerSchema = z
             })
             .max(50),
         email: z.email(),
-        phone: z.string(),
+        // phone: z.string(),
+        phone: z
+            .string()
+            .regex(/^(?:\+8801\d{9}|01\d{9})$/, {
+                message: "Phone number must be valid for Bangladesh. Format: +8801XXXXXXXXX or 01XXXXXXXXX",
+            })
+            .optional(),
         password: z.string().min(8, { error: "Password is too short" }),
         confirmPassword: z
             .string()
@@ -90,6 +96,23 @@ export function RegisterForm({
             //     "Something went wrong. Please try again!";
             // toast.error(errorMessage);
             // console.error("Register Error:", err);
+
+
+            // Check for Zod validation details
+            // const err = error as any;
+
+            // const zodErrors = err?.data?.errorDetails;
+            // let errorMessage =
+            //     err?.data?.message ||
+            //     err?.message ||
+            //     "Something went wrong. Please try again!";
+
+            // // If Zod validation error exists, extract readable message
+            // if (Array.isArray(zodErrors) && zodErrors.length > 0) {
+            //     errorMessage = zodErrors.map((err: any) => err.message).join(", ");
+            // }
+
+            // toast.error(errorMessage);
         }
     };
 

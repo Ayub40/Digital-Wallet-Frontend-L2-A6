@@ -45,7 +45,7 @@ export default function Navbar() {
     dispatch(authApi.util.resetApiState());
   };
 
-  
+
   if (isLoading) {
     return <Loader />;
   }

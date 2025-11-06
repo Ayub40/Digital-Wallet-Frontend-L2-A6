@@ -7,9 +7,12 @@ const features = [
     { title: "Multi-currency Support", description: "Transact in multiple currencies.", icon: <Check /> },
 ];
 
+console.log(document.querySelector(".features-menu"));
+
+
 export default function Features() {
     return (
-        <div className="space-y-6 p-6 mx-auto max-w-screen-xl">
+        <div className="space-y-6 p-6 mx-auto max-w-screen-xl features-menu">
             <h1 className="text-3xl font-bold">Features</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {features.map((feature, index) => (
