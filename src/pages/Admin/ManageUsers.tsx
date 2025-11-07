@@ -42,7 +42,8 @@ export default function AllUser() {
     const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
     const [confirmUser, setConfirmUser] = useState<any>(null);
 
-    const users = usersRes?.data || [];
+    // const users = usersRes?.data || [];
+    const users = usersRes?.data?.slice(1) || [];
 
     const { data: userDetail } = useGetSingleUserQuery(selectedUserId!, {
         skip: !selectedUserId,
