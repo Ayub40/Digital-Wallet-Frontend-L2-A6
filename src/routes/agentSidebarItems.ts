@@ -20,11 +20,6 @@ export const agentSidebarItems: ISidebarItem[] = [
                 url: "/agent/agent-overview",
                 component: AgentOverview
             }
-            // {
-            //     title: "Transaction History",
-            //     url: "/agent/transaction-history",
-            //     component: AgentTransactionsHistory,
-            // },
         ],
     },
     {
