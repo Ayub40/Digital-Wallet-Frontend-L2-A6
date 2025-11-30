@@ -24,7 +24,13 @@ import Loader from "@/specialUi/Loader";
 
 const profileSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
-    phone: z.string().optional(),
+    // phone: z.string().optional(),
+    phone: z
+        .string()
+        .regex(/^(?:\+8801\d{9}|01\d{9})$/, {
+            message: "Phone number must be valid for Bangladesh. Format: +8801XXXXXXXXX or 01XXXXXXXXX",
+        })
+        .optional(),
     oldPassword: z.string().min(6).optional(),
     newPassword: z.string().min(6).optional(),
 });
