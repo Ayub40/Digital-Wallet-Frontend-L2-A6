@@ -71,7 +71,8 @@ export const transactionApi = baseApi.injectEndpoints({
                 method: "GET",
                 params
             }),
-            providesTags: ["ADMIN"],
+            // providesTags: ["ADMIN"],
+            providesTags: ["TRANSACTIONS"],
             // transformResponse: (response) => response.data,
             transformResponse: (response) => response
         }),

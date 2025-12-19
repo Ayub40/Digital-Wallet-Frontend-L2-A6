@@ -28,6 +28,12 @@ const axiosBaseQuery =
             } catch (axiosError) {
                 const err = axiosError as AxiosError;
 
+                // console.log("RTK QUERY ERROR 👉", {
+                //     err,
+                //     response: err.response,
+                //     message: err.message,
+                // });
+
                 // New Code
                 // Global Error Toast Here
                 // const message =
@@ -41,6 +47,11 @@ const axiosBaseQuery =
                     error: {
                         status: err.response?.status,
                         data: err.response?.data || err.message,
+                        // status: err.response?.status ?? "FETCH_ERROR",
+                        // data:
+                        //     (err.response?.data as any)?.message ||
+                        //     err.message ||
+                        //     "Something went wrong",
                     },
                 };
             }

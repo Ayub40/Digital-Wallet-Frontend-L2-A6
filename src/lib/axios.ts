@@ -47,12 +47,19 @@ axiosInstance.interceptors.response.use(
     },
     async (error) => {
         // console.log("Request failed", error.response.data.message);
+        // console.log("AXIOS INTERCEPTOR ERROR 👉", {
+        //     error,
+        //     response: error?.response,
+        //     data: error?.response?.data,
+        //     status: error?.response?.status,
+        // });
 
         const originalRequest = error.config as AxiosRequestConfig & {
             _retry: boolean;
         };
 
         if (
+            // error.response &&
             error.response.status === 500 &&
             error.response.data.message === "jwt expired" &&
             !originalRequest._retry

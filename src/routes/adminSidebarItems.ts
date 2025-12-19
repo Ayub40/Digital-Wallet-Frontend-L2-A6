@@ -1,7 +1,9 @@
 // import AllUser from "@/pages/Admin/AllUser";
 import ManageAgents from "@/pages/Admin/ManageAgents";
 import ManageUsers from "@/pages/Admin/ManageUsers";
-import ViewTransactions from "@/pages/Admin/ViewTransactions";
+// import ViewTransactions from "@/pages/Admin/ViewTransactions";
+import AdminTransactionFilter from "@/pages/AdvancedFilter/AdminTransactionFilter";
+// import AgentTransactionsHistory from "@/pages/Agent/AgentTransactionsHistory";
 import MyProfile from "@/pages/MyProfile";
 import { UpdateProfileForm } from "@/pages/UpdateProfile";
 import type { ISidebarItem } from "@/types";
@@ -34,10 +36,15 @@ export const adminSidebarItems: ISidebarItem[] = [
                 url: "/admin/manage-agents",
                 component: ManageAgents,
             },
+            // {
+            //     title: "View All Transactions",
+            //     url: "/admin/view-transactions",
+            //     component: ViewTransactions,
+            // },
             {
                 title: "View All Transactions",
                 url: "/admin/view-transactions",
-                component: ViewTransactions,
+                component: AdminTransactionFilter,
             },
         ],
     },

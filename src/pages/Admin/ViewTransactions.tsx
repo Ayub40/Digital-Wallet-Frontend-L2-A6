@@ -16,16 +16,17 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Loader2 } from "lucide-react";
+// import { Loader2 } from "lucide-react";
 
 import { useGetAllTransactionsQuery } from "@/redux/features/transaction/transaction.api";
 import { useSearchParams } from "react-router";
 import Loader from "@/specialUi/Loader";
+import TransactionUser from "../AdvancedFilter/TransactionUser";
 
 export default function ViewAllTransactions() {
+    const [searchParams] = useSearchParams();
     const [currentPage, setCurrentPage] = useState(1);
     const [limit] = useState(10);
-    const [searchParams] = useSearchParams();
 
     const { data, isLoading, isError } = useGetAllTransactionsQuery({
         page: currentPage,
@@ -34,9 +35,9 @@ export default function ViewAllTransactions() {
         status: searchParams.get("status") || undefined,
         startDate: searchParams.get("startDate") || undefined,
         endDate: searchParams.get("endDate") || undefined,
-        minAmount: searchParams.get("minAmount") || undefined,
-        maxAmount: searchParams.get("maxAmount") || undefined,
-        search: searchParams.get("search") || undefined,
+        // minAmount: searchParams.get("minAmount") || undefined,
+        // maxAmount: searchParams.get("maxAmount") || undefined,
+        // search: searchParams.get("search") || undefined,
     });
 
     console.log(data);
@@ -62,6 +63,7 @@ export default function ViewAllTransactions() {
         <div className="p-4 space-y-4">
             <h1 className="text-xl font-semibold">All Transactions</h1>
             {/* <TransactionFiltersAdmin /> */}
+            <TransactionUser />
 
             <div className="overflow-x-auto">
                 <Table>
