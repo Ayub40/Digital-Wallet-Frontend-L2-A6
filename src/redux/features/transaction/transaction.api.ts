@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "@/redux/baseApi";
 // import type { IResponse, ITourPackage } from "@/types";
 
@@ -65,17 +66,27 @@ export const transactionApi = baseApi.injectEndpoints({
             invalidatesTags: ["TRANSACTIONS"],
         }),
 
+        // getAllTransactions: builder.query({
+        //     query: (params) => ({
+        //         url: "/transaction/transactions-history",
+        //         method: "GET",
+        //         params
+        //     }),
+        //     // providesTags: ["ADMIN"],
+        //     providesTags: ["TRANSACTIONS"],
+        //     // transformResponse: (response) => response.data,
+        //     transformResponse: (response) => response
+        // }),
+
         getAllTransactions: builder.query({
             query: (params) => ({
                 url: "/transaction/transactions-history",
                 method: "GET",
-                params
+                params,
             }),
-            // providesTags: ["ADMIN"],
             providesTags: ["TRANSACTIONS"],
-            // transformResponse: (response) => response.data,
-            transformResponse: (response) => response
-        }),
+        })
+
 
     }),
 });

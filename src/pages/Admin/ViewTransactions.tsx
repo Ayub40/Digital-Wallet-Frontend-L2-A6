@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import {
     Table,
@@ -40,10 +41,26 @@ export default function ViewAllTransactions() {
         // search: searchParams.get("search") || undefined,
     });
 
-    console.log(data);
 
-    const transactions = data?.data || [];
-    const totalPage = data?.meta?.totalPage || 1;
+
+    // const transactions = data?.data || [];
+    // const totalPage = data?.meta?.totalPage || 1;
+
+    // New
+    const transactions = data?.data?.transactions ?? [];
+    // const totalAmount = data?.data?.totalAmount ?? 0;
+
+    const totalPage = data?.meta?.totalPage ?? 1;
+    // const totalAmount = data?.totalAmount ?? 0;
+
+
+
+    console.log("FULL RESPONSE:", data);
+    console.log("DATA OBJECT:", data?.data);
+    console.log("TRANSACTIONS:", data?.data?.transactions);
+
+
+
 
     useEffect(() => {
         setCurrentPage(1);
