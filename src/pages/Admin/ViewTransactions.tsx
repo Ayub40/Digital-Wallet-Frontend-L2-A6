@@ -36,9 +36,6 @@ export default function ViewAllTransactions() {
         status: searchParams.get("status") || undefined,
         startDate: searchParams.get("startDate") || undefined,
         endDate: searchParams.get("endDate") || undefined,
-        // minAmount: searchParams.get("minAmount") || undefined,
-        // maxAmount: searchParams.get("maxAmount") || undefined,
-        // search: searchParams.get("search") || undefined,
     });
 
 
@@ -53,13 +50,9 @@ export default function ViewAllTransactions() {
     const totalPage = data?.meta?.totalPage ?? 1;
     // const totalAmount = data?.totalAmount ?? 0;
 
-
-
     console.log("FULL RESPONSE:", data);
     console.log("DATA OBJECT:", data?.data);
     console.log("TRANSACTIONS:", data?.data?.transactions);
-
-
 
 
     useEffect(() => {

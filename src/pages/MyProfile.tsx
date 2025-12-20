@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import Loader from "@/specialUi/Loader";
 import { Link } from "react-router";
-// import { BorderBeam } from "@/components/magicui/border-beam";
 
 const MyProfile = () => {
     const { data, isLoading, isError } = useUserInfoQuery(null, {
@@ -20,60 +19,145 @@ const MyProfile = () => {
             </div>
         );
     }
-    if (isError) return <p>Failed to load profile</p>;
+    if (isError) return <p className="text-red-500 text-center">Failed to load profile</p>;
 
     const user = data?.data;
 
     return (
-        <Card className="relative w-[350px] mx-auto overflow-hidden shadow-xl rounded-2xl">
-            <CardHeader className="flex flex-col items-center gap-2">
-                <Avatar className="w-20 h-20 border-2 border-primary">
-                    <AvatarImage src={user?.image} alt={user?.name} />
-                    <AvatarFallback>
-                        {user?.name ? user.name.charAt(0) : "U"}
-                    </AvatarFallback>
-                </Avatar>
-                <CardTitle className="text-xl font-semibold">{user?.name}</CardTitle>
-                <CardDescription className="text-sm text-muted-foreground">
-                    {user?.email}
-                </CardDescription>
-                <Badge variant="outline" className="text-xs">
-                    {user?.role}
-                </Badge>
-            </CardHeader>
+        <div className="w-full px-4 py-6 md:py-10">
+            <div className="max-w-7xl mx-auto">
+                <Card className="relative w-full overflow-hidden shadow-xl rounded-2xl">
+                    <CardHeader className="flex flex-col items-center gap-3 pt-6">
+                        <Avatar className="w-24 h-24 border-2 border-primary">
+                            <AvatarImage src={user?.image} alt={user?.name} />
+                            <AvatarFallback>{user?.name ? user.name.charAt(0) : "U"}</AvatarFallback>
+                        </Avatar>
+                        <CardTitle className="text-2xl font-semibold">{user?.name}</CardTitle>
+                        <CardDescription className="text-sm text-muted-foreground">{user?.email}</CardDescription>
+                        <Badge variant="outline" className="text-sm px-3 py-1">
+                            {user?.role}
+                        </Badge>
+                    </CardHeader>
 
-            <CardContent className="space-y-3 text-sm">
-                <div>
-                    <p className="font-medium">Phone:</p>
-                    <p className="text-muted-foreground">{user?.phone || "Not added"}</p>
-                </div>
-                <div>
-                    <p className="font-medium">Wallet Balance:</p>
-                    <p className="text-muted-foreground">{user?.wallet?.balance} BDT</p>
-                </div>
-                <div>
-                    <p className="font-medium">Status:</p>
-                    <Badge
-                        className={`${user?.isActive === "ACTIVE"
-                            ? "bg-green-500 text-white"
-                            : "bg-red-500 text-white"
-                            }`}
-                    >
-                        {user?.isActive}
-                    </Badge>
-                </div>
-                <div>
-                    <Button asChild className="w-full">
-                        {/* <Link to="/agent/update-profile">Update Profile</Link> */}
-                        <Link to={`/${user.role.toLowerCase()}/update-profile`}>Update Profile</Link>
-                    </Button>
-                </div>
-            </CardContent>
+                    <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm pt-4">
+                        <div>
+                            <p className="font-medium">Phone:</p>
+                            <p className="text-muted-foreground">{user?.phone || "Not added"}</p>
+                        </div>
+                        <div>
+                            <p className="font-medium">Wallet Balance:</p>
+                            <p className="text-muted-foreground">{user?.wallet?.balance ?? 0} BDT</p>
+                        </div>
+                        <div>
+                            <p className="font-medium">Status:</p>
+                            <Badge
+                                className={`${
+                                    user?.isActive === "ACTIVE"
+                                        ? "bg-green-500 text-white"
+                                        : "bg-red-500 text-white"
+                                } px-3 py-1`}
+                            >
+                                {user?.isActive}
+                            </Badge>
+                        </div>
+                        <div className="flex items-center justify-center sm:justify-end">
+                            <Button asChild className="w-full sm:w-auto">
+                                <Link to={`/${user.role.toLowerCase()}/update-profile`}>Update Profile</Link>
+                            </Button>
+                        </div>
+                    </CardContent>
 
-            {/* Border Animation */}
-            <BorderBeam duration={8} size={120} />
-        </Card>
+                    {/* Border Animation */}
+                    <BorderBeam duration={8} size={120} />
+                </Card>
+            </div>
+        </div>
     );
 };
 
 export default MyProfile;
+
+
+
+
+
+
+// import { BorderBeam } from "@/components/magicui/border-beam";
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+// import { Badge } from "@/components/ui/badge";
+// import { Button } from "@/components/ui/button";
+// import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+// import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
+// import Loader from "@/specialUi/Loader";
+// import { Link } from "react-router";
+
+// const MyProfile = () => {
+//     const { data, isLoading, isError } = useUserInfoQuery(null, {
+//         refetchOnMountOrArgChange: true,
+//     });
+
+//     if (isLoading) {
+//         return (
+//             <div className="flex justify-center items-center h-40 text-gray-600">
+//                 <Loader />
+//             </div>
+//         );
+//     }
+//     if (isError) return <p>Failed to load profile</p>;
+
+//     const user = data?.data;
+    
+
+//     return (
+//         <Card className="relative w-[350px] mx-auto overflow-hidden shadow-xl rounded-2xl">
+//             <CardHeader className="flex flex-col items-center gap-2">
+//                 <Avatar className="w-20 h-20 border-2 border-primary">
+//                     <AvatarImage src={user?.image} alt={user?.name} />
+//                     <AvatarFallback>
+//                         {user?.name ? user.name.charAt(0) : "U"}
+//                     </AvatarFallback>
+//                 </Avatar>
+//                 <CardTitle className="text-xl font-semibold">{user?.name}</CardTitle>
+//                 <CardDescription className="text-sm text-muted-foreground">
+//                     {user?.email}
+//                 </CardDescription>
+//                 <Badge variant="outline" className="text-xs">
+//                     {user?.role}
+//                 </Badge>
+//             </CardHeader>
+
+//             <CardContent className="space-y-3 text-sm">
+//                 <div>
+//                     <p className="font-medium">Phone:</p>
+//                     <p className="text-muted-foreground">{user?.phone || "Not added"}</p>
+//                 </div>
+//                 <div>
+//                     <p className="font-medium">Wallet Balance:</p>
+//                     <p className="text-muted-foreground">{user?.wallet?.balance} BDT</p>
+//                 </div>
+//                 <div>
+//                     <p className="font-medium">Status:</p>
+//                     <Badge
+//                         className={`${user?.isActive === "ACTIVE"
+//                             ? "bg-green-500 text-white"
+//                             : "bg-red-500 text-white"
+//                             }`}
+//                     >
+//                         {user?.isActive}
+//                     </Badge>
+//                 </div>
+//                 <div>
+//                     <Button asChild className="w-full">
+//                         {/* <Link to="/agent/update-profile">Update Profile</Link> */}
+//                         <Link to={`/${user.role.toLowerCase()}/update-profile`}>Update Profile</Link>
+//                     </Button>
+//                 </div>
+//             </CardContent>
+
+//             {/* Border Animation */}
+//             <BorderBeam duration={8} size={120} />
+//         </Card>
+//     );
+// };
+
+// export default MyProfile;

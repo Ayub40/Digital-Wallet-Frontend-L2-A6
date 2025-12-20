@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useSearchParams } from "react-router";
+import { Trash2 } from "lucide-react"; 
 
 export default function TransactionUser() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -27,60 +28,68 @@ export default function TransactionUser() {
     };
 
     return (
-        <div className="w-full border p-4 rounded-md space-y-4 flex items-end gap-4">
-            {/* <div className="flex justify-between items-center"> */}
-            <div className="items-center gap-2">
-                <h1 className="text-lg font-semibold">Filters</h1>
-                <Button size="sm" variant="outline" onClick={handleClearFilter}>
+        <div className="w-full border bg-card p-5 rounded-xl shadow-sm space-y-5">
+            {/* Header Section */}
+            <div className="flex items-center justify-between border-b pb-3">
+                <h1 className="text-xl font-bold tracking-tight">Filters</h1>
+                <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    onClick={handleClearFilter}
+                    className="text-destructive hover:bg-destructive/10 transition-colors"
+                >
+                    <Trash2 className="w-4 h-4 mr-2" />
                     Clear Filter
                 </Button>
             </div>
 
-            {/* Filter by Type */}
-            <div className="">
-                <Label className="">Transaction Type</Label>
-                <Select value={selectedType} onValueChange={handleTypeChange}>
-                    {/* <SelectTrigger className="w-full"> */}
-                    <SelectTrigger className="w-40">
-                        <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            <SelectItem value="ADD">Add</SelectItem>
-                            <SelectItem value="WITHDRAW">Withdraw</SelectItem>
-                            <SelectItem value="TRANSFER">Transfer</SelectItem>
-                            <SelectItem value="CASH_IN">Cash In</SelectItem>
-                            <SelectItem value="CASH_OUT">Cash Out</SelectItem>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-            </div>
-
-            {/* Filter by Date Range */}
-            {/* <div className="flex gap-2"> */}
-            {/* <div className="flex-1"> */}
-            <div className="flex gap-4">
-                <div className="">
-                    <Label className="">Start Date</Label>
-                    <input
-                        type="date"
-                        value={startDate}
-                        onChange={(e) => handleDateChange("startDate", e.target.value)}
-                        className="w-40 border rounded p-2"
-                    />
+            {/* Filter Controls */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:items-end gap-4">
+                
+                {/* Filter by Type */}
+                <div className="space-y-2 lg:w-48">
+                    <Label className="text-sm font-medium text-muted-foreground">Transaction Type</Label>
+                    <Select value={selectedType} onValueChange={handleTypeChange}>
+                        <SelectTrigger className="w-full focus:ring-2">
+                            <SelectValue placeholder="All Types" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                <SelectItem value="ADD">Add Money</SelectItem>
+                                <SelectItem value="WITHDRAW">Withdraw</SelectItem>
+                                <SelectItem value="TRANSFER">Transfer</SelectItem>
+                                <SelectItem value="CASH_IN">Cash In</SelectItem>
+                                <SelectItem value="CASH_OUT">Cash Out</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
                 </div>
-                {/* <div className="flex-1"> */}
-                <div className="">
-                    <Label className="">End Date</Label>
-                    <input
-                        type="date"
-                        value={endDate}
-                        onChange={(e) => handleDateChange("endDate", e.target.value)}
-                        className="w-40 border rounded p-2"
-                    />
+
+                {/* Date Inputs - Wrapping in a sub-grid for better mobile look */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:flex lg:gap-4 flex-1">
+                    <div className="space-y-2 flex-1">
+                        <Label className="text-sm font-medium text-muted-foreground">Start Date</Label>
+                        <input
+                            type="date"
+                            value={startDate}
+                            onChange={(e) => handleDateChange("startDate", e.target.value)}
+                            className="w-full h-10 border rounded-md px-3 py-2 text-sm bg-background ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-input transition-all"
+                        />
+                    </div>
+
+                    <div className="space-y-2 flex-1">
+                        <Label className="text-sm font-medium text-muted-foreground">End Date</Label>
+                        <input
+                            type="date"
+                            value={endDate}
+                            onChange={(e) => handleDateChange("endDate", e.target.value)}
+                            className="w-full h-10 border rounded-md px-3 py-2 text-sm bg-background ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:border-input transition-all"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
+
 

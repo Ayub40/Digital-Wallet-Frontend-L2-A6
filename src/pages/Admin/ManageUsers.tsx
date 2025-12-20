@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -34,20 +35,33 @@ import {
 } from "@/redux/features/auth/auth.api";
 import Loader from "@/specialUi/Loader";
 
-export default function AllUser() {
-    const { data: usersRes, isLoading, refetch } = useGetAllUsersQuery({});
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination";
+
+export default function ManageUsers() {
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 10; 
+
+    const { data: usersRes, isLoading, refetch } = useGetAllUsersQuery(
+        { page: currentPage.toString(), limit: limit.toString() },
+        { refetchOnMountOrArgChange: true }
+    );
     const [toggleStatus] = useUserStatusMutation();
     const [updateRole] = useUpdateUserRoleMutation();
 
     const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
     const [confirmUser, setConfirmUser] = useState<any>(null);
 
-    // const users = usersRes?.data || [];
-    const users = usersRes?.data?.slice(1) || [];
+    const users = usersRes?.data ?? [];
+    const totalPage = usersRes?.meta?.totalPage ?? 1;
 
-    const { data: userDetail } = useGetSingleUserQuery(selectedUserId!, {
-        skip: !selectedUserId,
-    });
+    const { data: userDetail } = useGetSingleUserQuery(selectedUserId!, { skip: !selectedUserId });
 
     // ----- User Block / Unblock -----
     const handleStatus = async (user: any) => {
@@ -56,19 +70,15 @@ export default function AllUser() {
             toast.success(`${user.isActive === "ACTIVE" ? "Blocked" : "Unblocked"} successfully`);
             refetch();
             setConfirmUser(null);
-        } catch (err) {
+        } catch {
             toast.error("Action failed");
         }
     };
 
-    // ----- Role Change + Auto Approve/Suspend -----
+    // ----- Role Change -----
     const handleRoleChange = async (user: any, role: string) => {
         try {
-            await updateRole({
-                userId: user._id,
-                role
-            }).unwrap();
-
+            await updateRole({ userId: user._id, role }).unwrap();
             toast.success("Role updated successfully");
             refetch();
         } catch {
@@ -99,50 +109,92 @@ export default function AllUser() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {users.map((user: any) => (
-                        <TableRow key={user._id}>
-                            <TableCell>{user.name}</TableCell>
-                            <TableCell>{user.email}</TableCell>
-                            <TableCell>
-                                <Select
-                                    defaultValue={user.role}
-                                    onValueChange={(val) => handleRoleChange(user, val)}
-                                >
-                                    <SelectTrigger>
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="USER">USER</SelectItem>
-                                        <SelectItem value="AGENT">AGENT</SelectItem>
-                                        <SelectItem value="ADMIN">ADMIN</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </TableCell>
-                            <TableCell>
-                                <span className={user.isActive === "ACTIVE" ? "text-green-600" : "text-red-600"}>
-                                    {user.isActive}
-                                </span>
-                            </TableCell>
-                            <TableCell>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="outline" className="p-2">
-                                            <EllipsisVertical />
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent className="w-36">
-                                        <DropdownMenuItem onClick={() => setSelectedUserId(user._id)}>View</DropdownMenuItem>
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuItem onClick={() => setConfirmUser(user)}>
-                                            {user.isActive === "ACTIVE" ? "Block" : "Unblock"}
-                                        </DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
+                    {users.length > 0 ? (
+                        users.map((user: any) => (
+                            <TableRow key={user._id}>
+                                <TableCell>{user.name}</TableCell>
+                                <TableCell>{user.email}</TableCell>
+                                <TableCell>
+                                    <Select
+                                        defaultValue={user.role}
+                                        onValueChange={(val) => handleRoleChange(user, val)}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="USER">USER</SelectItem>
+                                            <SelectItem value="AGENT">AGENT</SelectItem>
+                                            <SelectItem value="ADMIN">ADMIN</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </TableCell>
+                                <TableCell>
+                                    <span className={user.isActive === "ACTIVE" ? "text-green-600" : "text-red-600"}>
+                                        {user.isActive}
+                                    </span>
+                                </TableCell>
+                                <TableCell>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button variant="outline" className="p-2">
+                                                <EllipsisVertical />
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent className="w-36">
+                                            <DropdownMenuItem onClick={() => setSelectedUserId(user._id)}>View</DropdownMenuItem>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem onClick={() => setConfirmUser(user)}>
+                                                {user.isActive === "ACTIVE" ? "Block" : "Unblock"}
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </TableCell>
+                            </TableRow>
+                        ))
+                    ) : (
+                        <TableRow>
+                            <TableCell colSpan={5} className="text-center text-gray-500">
+                                No users found
                             </TableCell>
                         </TableRow>
-                    ))}
+                    )}
                 </TableBody>
             </Table>
+
+            {/* Pagination */}
+            {totalPage > 1 && (
+                <div className="flex justify-end mt-4">
+                    <Pagination>
+                        <PaginationContent>
+                            <PaginationItem>
+                                <PaginationPrevious
+                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                    className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                                />
+                            </PaginationItem>
+
+                            {Array.from({ length: totalPage }, (_, i) => i + 1).map(page => (
+                                <PaginationItem key={page}>
+                                    <PaginationLink
+                                        isActive={currentPage === page}
+                                        onClick={() => setCurrentPage(page)}
+                                    >
+                                        {page}
+                                    </PaginationLink>
+                                </PaginationItem>
+                            ))}
+
+                            <PaginationItem>
+                                <PaginationNext
+                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPage))}
+                                    className={currentPage === totalPage ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                                />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
+                </div>
+            )}
 
             {/* User Details Dialog */}
             {selectedUserId && userDetail?.data && (
@@ -189,4 +241,6 @@ export default function AllUser() {
         </div>
     );
 }
+
+
 

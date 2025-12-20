@@ -55,17 +55,19 @@ export const authApi = baseApi.injectEndpoints({
         }),
 
         getAllUsers: builder.query({
-            query: () => ({
+            query: (params) => ({
                 url: "/user/all-users",
                 method: "GET",
+                params: params,
             }),
             providesTags: ["ADMIN"],
         }),
 
-        getAllAgents: builder.query<any, void>({
-            query: () => ({
+        getAllAgents: builder.query<any, { page?: string; limit?: string; searchTerm?: string }>({
+            query: (params) => ({
                 url: "/user/agents",
                 method: "GET",
+                params,
             }),
             providesTags: ["ADMIN"],
         }),
