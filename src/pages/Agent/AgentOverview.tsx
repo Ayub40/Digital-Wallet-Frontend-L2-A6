@@ -2,7 +2,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGetOverviewQuery } from "@/redux/features/admin/admin.api";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
-// import TransactionHistory from "../TransactionHistory";
 import Loader from "@/specialUi/Loader";
 import {
     ResponsiveContainer,
@@ -49,7 +48,7 @@ export default function AgentOverview() {
     const overview = overviewData?.data || {};
     const profile = userData?.data || {};
 
-    const role = profile?.role; // role ডিফাইন করা হলো
+    const role = profile?.role; 
 
     // Balance from Profile (wallet.balance)
     const currentBalance = profile?.wallet?.balance ?? 0;
@@ -267,134 +266,6 @@ export default function AgentOverview() {
                     </Card>
                 </div>
             )}
-
-
-
-            {/* --- Top Customers Section (Only for Agents) --- */}
-            {/* {overview.topUsers?.length > 0 && (
-                <Card className="rounded-2xl shadow-md border-none bg-white dark:bg-gray-800 mt-8">
-                    <CardHeader className="border-b">
-                        <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                            <TrendingUp className="h-5 w-5 text-emerald-600" />
-                            Top Customers
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-0">
-                        <div className="divide-y dark:divide-gray-700">
-                            {overview.topUsers.map((user: any, index: number) => (
-                                <div key={index} className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-emerald-700 dark:text-emerald-300 font-bold">
-                                            {user.name.charAt(0)}
-                                        </div>
-                                        <div>
-                                            <p className="font-medium text-gray-900 dark:text-gray-100">{user.name}</p>
-                                            <p className="text-xs text-gray-500">Regular Customer</p>
-                                        </div>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="font-bold text-emerald-600">৳ {user.amount.toLocaleString()}</p>
-                                        <p className="text-xs text-gray-400">Volume</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </CardContent>
-                </Card>
-            )} */}
-
-
         </div>
     );
 }
-
-
-
-
-
-
-
-
-
-
-
-// /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// import { useGetHistoryQuery } from "@/redux/features/transaction/transaction.api";
-// // import { Loader2 } from "lucide-react";
-// import TransactionHistory from "../TransactionHistory";
-// import Loader from "@/specialUi/Loader";
-
-// export default function AgentOverview() {
-//     const { data: txRes, isLoading, isError } = useGetHistoryQuery(undefined);
-
-//     if (isLoading) {
-//         return (
-//             <div className="flex justify-center items-center h-40 text-gray-600">
-//                 {/* <Loader2 className="animate-spin h-6 w-6 mr-2" /> */}
-//                 <Loader />
-//                 {/* Loading Overview... */}
-//             </div>
-//         );
-//     }
-
-//     if (isError) {
-//         return (
-//             <div className="text-center text-red-500">
-//                 Failed to load transaction data.
-//             </div>
-//         );
-//     }
-
-//     // transaction data
-//     const transactions = txRes?.data || [];
-
-//     // ✅ Calculate totals
-//     const cashInTotal = transactions
-//         .filter((tx: any) => tx.type === "CASH_IN")
-//         .reduce((sum: number, tx: any) => sum + (tx.amount || 0), 0);
-
-//     const cashOutTotal = transactions
-//         .filter((tx: any) => tx.type === "CASH_OUT")
-//         .reduce((sum: number, tx: any) => sum + (tx.amount || 0), 0);
-
-
-
-//     return (
-//         <div className="space-y-6">
-//             {/* Summary Section - Single Row */}
-//             <h1 className="dark:text-white text-center text-4xl font-bold">Agent Overview</h1>
-//             <div className="flex flex-col md:flex-row gap-6">
-//                 <Card className="flex-1 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300">
-//                     <CardHeader>
-//                         <CardTitle className="text-lg font-semibold text-gray-700 dark:text-white">Cash-In Total</CardTitle>
-//                     </CardHeader>
-//                     <CardContent>
-//                         <p className="text-3xl font-bold text-green-600">{cashInTotal} $</p>
-//                     </CardContent>
-//                 </Card>
-
-//                 <Card className="flex-1 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition duration-300">
-//                     <CardHeader>
-//                         <CardTitle className="text-lg font-semibold text-gray-700 dark:text-white">Cash-Out Total</CardTitle>
-//                     </CardHeader>
-//                     <CardContent>
-//                         <p className="text-3xl font-bold text-red-600">{cashOutTotal} $</p>
-//                     </CardContent>
-//                 </Card>
-//             </div>
-
-//             {/* Transaction History Section - Below Summary */}
-//             <Card className="rounded-2xl shadow-lg border border-gray-200 p-5">
-//                 <CardHeader>
-//                     <CardTitle className="text-4xl font-bold text-gray-700 text-center dark:text-white">Recent Activity</CardTitle>
-//                 </CardHeader>
-//                 <CardContent className="space-y-4">
-//                     <TransactionHistory />
-//                 </CardContent>
-//             </Card>
-//         </div>
-
-
-//     );
-// }

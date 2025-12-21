@@ -1,7 +1,6 @@
 import MyProfile from "@/pages/MyProfile";
 import TransactionHistory from "@/pages/TransactionHistory";
 import { UpdateProfileForm } from "@/pages/UpdateProfile";
-// import AddMoney from "@/pages/User/AddMoney";
 import { SendMoney } from "@/pages/User/SendMoney";
 import UserOverview from "@/pages/User/UserOverview";
 import { UserWithDrawMoney } from "@/pages/User/UserWithDrawMoney";

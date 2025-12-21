@@ -38,21 +38,13 @@ export default function ViewAllTransactions() {
         endDate: searchParams.get("endDate") || undefined,
     });
 
-
-
-    // const transactions = data?.data || [];
-    // const totalPage = data?.meta?.totalPage || 1;
-
     // New
     const transactions = data?.data?.transactions ?? [];
-    // const totalAmount = data?.data?.totalAmount ?? 0;
-
     const totalPage = data?.meta?.totalPage ?? 1;
-    // const totalAmount = data?.totalAmount ?? 0;
 
-    console.log("FULL RESPONSE:", data);
-    console.log("DATA OBJECT:", data?.data);
-    console.log("TRANSACTIONS:", data?.data?.transactions);
+    // console.log("FULL RESPONSE:", data);
+    // console.log("DATA OBJECT:", data?.data);
+    // console.log("TRANSACTIONS:", data?.data?.transactions);
 
 
     useEffect(() => {

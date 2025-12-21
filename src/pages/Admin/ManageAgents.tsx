@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input"; // সার্চের জন্য
+import { Input } from "@/components/ui/input"; 
 import { EllipsisVertical, Search } from "lucide-react";
 import { toast } from "sonner";
 
@@ -108,7 +108,7 @@ export default function ManageAgents() {
                         className="pl-8"
                         onChange={(e) => {
                             setSearchTerm(e.target.value);
-                            setCurrentPage(1); // সার্চ করলে ১ নম্বর পেজে নিয়ে যাবে
+                            setCurrentPage(1); 
                         }}
                     />
                 </div>

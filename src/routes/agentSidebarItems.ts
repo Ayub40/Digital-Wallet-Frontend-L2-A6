@@ -1,4 +1,3 @@
-// import AgentOverview from "@/pages/Agent/AgentOverview";
 import AgentTransactionsHistory from "@/pages/Agent/AgentTransactionsHistory";
 import { CashIn } from "@/pages/Agent/CashIn";
 import { CashOut } from "@/pages/Agent/CashOut";
@@ -7,8 +6,6 @@ import { UpdateProfileForm } from "@/pages/UpdateProfile";
 import type { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
-
-// const AgentTransactionsHistory = lazy(() => import("@/pages/Agent/AgentTransactionsHistory"));
 const AgentOverview = lazy(() => import("@/pages/Agent/AgentOverview"));
 
 export const agentSidebarItems: ISidebarItem[] = [

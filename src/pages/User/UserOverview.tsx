@@ -7,7 +7,6 @@ import moment from "moment";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useGetOverviewQuery } from "@/redux/features/admin/admin.api";
 import Loader from "@/specialUi/Loader";
-// import TransactionHistory from "../TransactionHistory";
 import {
     ResponsiveContainer,
     LineChart,
@@ -115,7 +114,7 @@ export default function UserOverview() {
                 )}
             </div>
 
-            {/* --- ২. (Quick Actions) --- */}
+            {/* --- (Quick Actions) --- */}
             {role === "USER" && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Button

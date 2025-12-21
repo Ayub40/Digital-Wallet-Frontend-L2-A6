@@ -1,53 +1,61 @@
 import Logo from "@/assets/icons/Logo";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import { Github, Twitter, Linkedin, Mail } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="border-t">
-            <div className="container mx-auto max-w-screen-xl px-4 py-12">
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <footer className="relative border-t border-border/40 bg-muted/10 backdrop-blur-md">
+            {/* Background Orb Effect for Consistency */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-24 bg-primary/5 rounded-full blur-[80px] -z-10 pointer-events-none" />
 
-                    {/* Brand */}
-                    <div>
-                        <div className="flex items-center gap-2">
+            <div className="container mx-auto max-w-7xl px-6 py-12">
+                <div className="flex flex-col items-center text-center space-y-8">
+                    
+                    {/* Brand Section */}
+                    <div className="space-y-4 flex flex-col items-center">
+                        <Link to="/" className="opacity-90 hover:opacity-100 transition-opacity">
                             <Logo />
-                        </div>
-
-                        <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-                            Secure digital wallet for users, agents, and admins.
-                            Fast transactions, reliable system, and full control.
+                        </Link>
+                        <p className="max-w-md text-sm text-muted-foreground leading-relaxed font-medium">
+                            The next generation of digital wealth management. <br className="hidden md:block" />
+                            Secure, lightning-fast, and designed for your modern lifestyle.
                         </p>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h3 className="font-semibold text-foreground">Quick Links</h3>
-                        <ul className="mt-4 space-y-3 text-sm flex gap-5">
-                            <li>
-                                <Link to="/" className="text-muted-foreground hover:text-foreground">
-                                    Home
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/login" className="text-muted-foreground hover:text-foreground">
-                                    Login
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/register" className="text-muted-foreground hover:text-foreground">
-                                    Register
-                                </Link>
-                            </li>
-                        </ul>
+                    {/* Quick Links - Horizontal Layout */}
+                    <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+                        <Link to="/" className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors">Home</Link>
+                        <Link to="/login" className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors">Login</Link>
+                        <Link to="/register" className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors">Register</Link>
+                        <Link to="/register" className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors">Become Agent</Link>
+                    </nav>
+
+                    {/* Social Icons */}
+                    <div className="flex gap-5">
+                        {[Github, Twitter, Linkedin, Mail].map((Icon, i) => (
+                            <a 
+                                key={i} 
+                                href="#" 
+                                className="p-2.5 rounded-xl bg-background/50 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 hover:-translate-y-1 transition-all shadow-sm"
+                            >
+                                <Icon size={20} />
+                            </a>
+                        ))}
                     </div>
                 </div>
 
-                {/* Bottom */}
-                <div className="mt-10 border-t pt-6 text-center text-xs text-muted-foreground">
-                    © {new Date().getFullYear()} Digital Wallet. All rights reserved.
+                {/* Bottom Bar */}
+                <div className="mt-12 pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] font-medium text-muted-foreground/60">
+                    <p>© {new Date().getFullYear()} PayNest Digital Wallet. All rights reserved.</p>
+                    <div className="flex items-center gap-6">
+                        <span className="flex items-center gap-1.5 italic">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]" /> 
+                            System Live
+                        </span>
+                        <span className="font-mono bg-muted px-2 py-0.5 rounded text-[11px]">v2.0.4</span>
+                    </div>
                 </div>
             </div>
         </footer>
     );
 }
-
