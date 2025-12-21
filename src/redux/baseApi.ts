@@ -7,6 +7,6 @@ export const baseApi = createApi({
 
     // eta ( tagTypes ) dile reload na diai data cole asbe
     // tagTypes: ["USER", "TOUR", "DIVISION", "BOOKING"],
-    tagTypes: ["USER", "TRANSACTIONS", "ADMIN"],
+    tagTypes: ["USER", "TRANSACTIONS", "ADMIN", "AGENT"],
     endpoints: () => ({}),
 });

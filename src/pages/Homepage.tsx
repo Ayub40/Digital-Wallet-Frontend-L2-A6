@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
 import StatsSections from "./Home/StatsSection"
+// import AboutUsTab from "./Home/AboutUs"
 
 export default function HomePage() {
 
@@ -14,6 +15,7 @@ export default function HomePage() {
             <HeroSection />
             <StatsSections />
             <FeaturesSection />
+            {/* <AboutUsTab /> */}
             <SecuritySection />
             <CTASection />
         </main>
@@ -91,7 +93,7 @@ function FeaturesSection() {
     ]
 
     return (
-        <section className="py-20 max-w-screen-xl mx-auto px-6">
+        <section className="py-20 max-w-7xl mx-auto px-6">
             <h2 className="text-3xl font-bold text-center mb-12">PayNest Wallet Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {features.map((f, i) => (

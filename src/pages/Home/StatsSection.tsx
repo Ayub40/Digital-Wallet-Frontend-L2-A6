@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Loader from "@/specialUi/Loader";
-import { useGetAdminOverviewQuery } from "@/redux/features/admin/admin.api";
+import { useGetPublicOverviewQuery } from "@/redux/features/admin/admin.api";
 
 export default function StatsSection() {
-    const { data, isLoading } = useGetAdminOverviewQuery();
+    const { data, isLoading } = useGetPublicOverviewQuery();
+
 
     if (isLoading) {
         return (
@@ -26,8 +26,8 @@ export default function StatsSection() {
     ];
 
     return (
-        <section className="py-20 bg-muted max-w-7xl mx-auto mt-1 rounded-2xl">
-            <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 px-6">
+        <section className="py-20 bg-muted max-w-7xl mx-auto mt-10 rounded-2xl">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 px-6">
                 {stats.map((s, i) => (
                     <CounterCard key={i} {...s} />
                 ))}

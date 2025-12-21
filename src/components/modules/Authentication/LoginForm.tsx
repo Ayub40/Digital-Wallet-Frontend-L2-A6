@@ -29,6 +29,22 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
+const demoCredentials = {
+    USER: {
+        email: import.meta.env.VITE_USER_EMAIL,
+        password: import.meta.env.VITE_USER_PASSWORD,
+    },
+    AGENT: {
+        email: import.meta.env.VITE_AGENT_EMAIL,
+        password: import.meta.env.VITE_AGENT_PASSWORD,
+    },
+    ADMIN: {
+        email: import.meta.env.VITE_ADMIN_EMAIL,
+        password: import.meta.env.VITE_ADMIN_PASSWORD,
+    },
+};
+
+
 export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
     const navigate = useNavigate();
     const [login, { isLoading }] = useLoginMutation();
@@ -42,6 +58,12 @@ export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivE
             password: "",
         },
     });
+
+    const handleRoleLogin = (role: "USER" | "AGENT" | "ADMIN") => {
+        form.setValue("email", demoCredentials[role].email || "");
+        form.setValue("password", demoCredentials[role].password || "");
+    };
+
 
     const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
         try {
@@ -134,6 +156,33 @@ export function LoginForm({ className, ...props }: React.HTMLAttributes<HTMLDivE
                     </Button>
                 </form>
             </Form>
+
+            {/* Button */}
+            <div className="grid grid-cols-3 gap-2">
+                <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => handleRoleLogin("USER")}
+                >
+                    User Login
+                </Button>
+
+                <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => handleRoleLogin("AGENT")}
+                >
+                    Agent Login
+                </Button>
+
+                <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => handleRoleLogin("ADMIN")}
+                >
+                    Admin Login
+                </Button>
+            </div>
 
             <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
                 <span className="relative z-10 bg-background px-2 text-muted-foreground">
