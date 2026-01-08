@@ -1,6 +1,5 @@
 import Logo from "@/assets/icons/Logo";
 import { Link } from "react-router-dom";
-import { Github, Twitter, Linkedin, Mail } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -29,19 +28,6 @@ export default function Footer() {
                         <Link to="/register" className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors">Register</Link>
                         <Link to="/register" className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors">Become Agent</Link>
                     </nav>
-
-                    {/* Social Icons */}
-                    <div className="flex gap-5">
-                        {[Github, Twitter, Linkedin, Mail].map((Icon, i) => (
-                            <a 
-                                key={i} 
-                                href="#" 
-                                className="p-2.5 rounded-xl bg-background/50 border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/30 hover:-translate-y-1 transition-all shadow-sm"
-                            >
-                                <Icon size={20} />
-                            </a>
-                        ))}
-                    </div>
                 </div>
 
                 {/* Bottom Bar */}

@@ -136,7 +136,7 @@ export default function Navbar() {
                       <NavigationMenuItem key={index}>
                         <NavigationMenuLink
                           asChild
-                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                          className="text-muted-foreground hover:text-primary py-1.5 font-black"
                         >
                           <Link to={link.href}>{link.label}</Link>
                         </NavigationMenuLink>
