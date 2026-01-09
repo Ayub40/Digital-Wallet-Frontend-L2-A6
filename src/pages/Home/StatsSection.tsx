@@ -33,7 +33,7 @@ export function StatsSection() {
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((s, i) => (
                 <motion.div key={i} variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                    <Card className={`rounded-2xl border-border/50 bg-background/40 backdrop-blur-md hover:bg-muted/50 transition-all duration-300 shadow-xl border ${s.border}`}>
+                    <Card className={`rounded-2xl border-border/50 bg-background/40 backdrop-blur-md hover:bg-muted/50 transition-all duration-300 shadow-md border ${s.border}`}>
                         <CardContent className="p-8 text-center">
                             <div className={`w-14 h-14 rounded-2xl ${s.bg} ${s.color} flex items-center justify-center mx-auto mb-6 shadow-inner`}>
                                 <s.icon size={28} />

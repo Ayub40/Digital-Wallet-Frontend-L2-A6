@@ -1,54 +1,83 @@
-import { motion, type Variants } from "framer-motion";
-import { ArrowRight, UserPlus, CreditCard, Send } from "lucide-react";
-
-const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.8, ease: "easeOut" }
-    }
-};
+import { motion } from "framer-motion";
+import { UserPlus, CreditCard, Send, CheckCircle2 } from "lucide-react";
 
 export function HowItWorks() {
     const steps = [
-        { title: "Create Account", desc: "Sign up in 30 seconds with your phone number.", icon: UserPlus, color: "from-blue-500/10 to-blue-600/5", iconColor: "text-blue-500" },
-        { title: "Add Money", desc: "Link your card or visit an agent to top up.", icon: CreditCard, color: "from-purple-500/10 to-purple-600/5", iconColor: "text-purple-500" },
-        { title: "Start Transacting", desc: "Send money or pay bills with a single tap.", icon: Send, color: "from-emerald-500/10 to-emerald-600/5", iconColor: "text-emerald-500" },
+        { 
+            title: "Create Account", 
+            desc: "Sign up in 30 seconds with your phone number. No complex paperwork required.", 
+            icon: UserPlus, 
+            color: "text-blue-600",
+            bgColor: "bg-blue-50"
+        },
+        { 
+            title: "Add Money", 
+            desc: "Link your bank card or visit an agent to top up your wallet instantly.", 
+            icon: CreditCard, 
+            color: "text-indigo-600",
+            bgColor: "bg-indigo-50"
+        },
+        { 
+            title: "Start Transacting", 
+            desc: "Send money, pay bills, or shop online with a single secure tap.", 
+            icon: Send, 
+            color: "text-emerald-600",
+            bgColor: "bg-emerald-50"
+        },
     ];
 
     return (
-        <section className="space-y-16">
-            <div className="text-center space-y-4">
-                <h2 className="text-4xl md:text-5xl font-black tracking-tight">How it Works</h2>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Three simple steps to start your journey with PayNest today.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-                {steps.map((step, i) => (
-                    <motion.div
-                        key={i}
-                        variants={sectionVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        className={`relative p-10 rounded-2xl border border-border/40 bg-gradient-to-br ${step.color} backdrop-blur-xl text-center space-y-6 shadow-2xl hover:-translate-y-2 transition-transform duration-500`}
-                    >
-                        <div className={`w-20 h-20 mx-auto rounded-2xl bg-background/90 backdrop-blur-md flex items-center justify-center ${step.iconColor} border border-border/50 shadow-xl`}>
-                            <step.icon size={36} />
-                        </div>
-                        <h3 className="text-2xl font-bold">{step.title}</h3>
-                        <p className="text-muted-foreground leading-relaxed font-medium">{step.desc}</p>
+        <section className="py-3 w-full bg-background ">
+            <div className="container max-w-7xl mx-auto px-6">
 
-                        {i < 2 && (
-                            <div className="hidden lg:block absolute top-1/2 -right-4 translate-x-1/2 -translate-y-1/2 z-10">
-                                <div className="p-2 rounded-full bg-background border border-border shadow-lg">
-                                    <ArrowRight className="text-primary w-6 h-6" />
+                <div className="mx-auto mb-12 text-center">
+                    <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-4 ">
+                        Simple <span className="text-blue-600">Onboarding.</span>
+                    </h2>
+                    <p className="text-muted-foreground font-bold text-lg">
+                        Three easy steps to transform your digital finance experience.
+                    </p>
+                </div>
+
+     
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {steps.map((step, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1 }}
+                            className="relative p-6 rounded-xl border border-border/60 bg-card hover:shadow-xl hover:shadow-blue-500/5 transition-all group"
+                        >
+             
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className={`w-12 h-12 rounded-2xl ${step.bgColor} ${step.color} flex items-center justify-center`}>
+                                    <step.icon size={24} />
                                 </div>
+                                <div className="h-px flex-1 bg-border/50" />
+                                <span className="text-xs font-black text-muted-foreground/30 uppercase tracking-widest">
+                                    Step 0{i + 1}
+                                </span>
                             </div>
-                        )}
-                    </motion.div>
-                ))}
+
+                            <div className="space-y-3">
+                                <h3 className="text-xl font-black flex items-center gap-2">
+                                    {step.title}
+                                    <CheckCircle2 size={16} className="text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                </h3>
+                                <p className="text-muted-foreground font-medium leading-snug">
+                                    {step.desc}
+                                </p>
+                            </div>
+
+                       
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-blue-600 group-hover:w-1/2 transition-all duration-500 rounded-b-full" />
+                        </motion.div>
+                    ))}
+                </div>
             </div>
         </section>
     );
 }
+

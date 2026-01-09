@@ -1,37 +1,113 @@
-import { motion, type Variants } from "framer-motion";
-import { ShieldCheck, CheckCircle2 } from "lucide-react";
-
-const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.8, ease: "easeOut" }
-    }
-};
+import { motion } from "framer-motion";
+import {
+  ShieldCheck,
+  Lock,
+  Fingerprint,
+  Activity,
+  CheckCircle2,
+} from "lucide-react";
 
 export function SecuritySection() {
-    return (
-        <motion.section variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <div className="bg-gradient-to-br from-primary/10 via-background to-purple-500/10 border border-border/60 rounded-2xl p-12 md:p-24 text-center relative shadow-2xl backdrop-blur-2xl overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px]" />
-                <div className="relative z-10 space-y-8">
-                    <div className="inline-flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-blue-700 text-white shadow-[0_20px_40px_-10px_rgba(59,130,246,0.5)] mb-4">
-                        <ShieldCheck size={48} />
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight">Regulated & Encrypted</h2>
-                    <p className="max-w-2xl mx-auto text-muted-foreground text-lg md:text-xl leading-relaxed font-semibold">
-                        Your assets are protected by double-layer SSL and biometric security protocols. Trusted by 50,000+ users worldwide.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-4 md:gap-8 pt-6">
-                        {["PCI DSS", "ISO 27001", "GDPR COMPLIANT"].map((text) => (
-                            <div key={text} className="flex items-center gap-3 font-bold text-xs bg-background/80 px-6 py-3 rounded-2xl border border-border/50 shadow-sm uppercase tracking-widest">
-                                <CheckCircle2 className="text-emerald-500 w-5 h-5" /> {text}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </motion.section>
-    );
+  return (
+    <section className="relative">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center rounded-xl border border-border/60 bg-card p-8 md:p-16 shadow-md">
+
+       
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="space-y-8"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-600 font-bold text-xs tracking-widest uppercase">
+            Security & Compliance
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight">
+            Built on <span className="text-blue-600">Trust</span>,  
+            Secured by Design
+          </h2>
+
+          <p className="text-lg text-muted-foreground font-medium leading-relaxed max-w-xl">
+            From encryption to fraud detection, every layer of our system
+            is engineered to protect your money, identity, and transactions
+            at all times.
+          </p>
+
+          <div className="space-y-3">
+            {[
+              "End-to-end encrypted transactions",
+              "Real-time fraud & anomaly detection",
+              "Strict access control & monitoring",
+            ].map((text) => (
+              <div key={text} className="flex items-center gap-3">
+                <CheckCircle2 className="text-emerald-500" size={20} />
+                <span className="font-semibold text-sm">{text}</span>
+              </div>
+            ))}
+          </div>
+
+
+          <div className="flex flex-wrap gap-3 pt-4">
+            {["PCI DSS", "ISO 27001", "GDPR"].map((c) => (
+              <span
+                key={c}
+                className="px-4 py-2 rounded-xl border border-border text-xs font-bold tracking-widest bg-background"
+              >
+                {c}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+   
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+        >
+          {[
+            {
+              icon: Lock,
+              title: "256-bit Encryption",
+              desc: "Industry-standard encryption for all data & payments.",
+            },
+            {
+              icon: Fingerprint,
+              title: "Biometric Security",
+              desc: "Fingerprint & device-level authentication support.",
+            },
+            {
+              icon: Activity,
+              title: "Live Monitoring",
+              desc: "Continuous monitoring to prevent suspicious activity.",
+            },
+            {
+              icon: ShieldCheck,
+              title: "Regulatory Compliance",
+              desc: "Fully aligned with global financial standards.",
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="rounded-2xl border border-border/50 bg-background p-6 shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <div className="h-11 w-11 rounded-xl bg-blue-500/10 text-blue-600 flex items-center justify-center mb-4">
+                <item.icon size={22} />
+              </div>
+              <h3 className="font-black text-lg mb-1">{item.title}</h3>
+              <p className="text-sm text-muted-foreground font-medium leading-relaxed">
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
 }
