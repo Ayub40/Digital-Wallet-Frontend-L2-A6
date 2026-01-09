@@ -46,7 +46,7 @@ export function FAQSection() {
                     </div>
 
 
-                    <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight">
+                    <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
                         Questions?
                         <br />
                         <span className="text-blue-600">Answered Clearly.</span>

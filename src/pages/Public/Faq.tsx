@@ -90,7 +90,7 @@ export default function FAQPage() {
             <div className="absolute top-[-5%] right-[-5%] w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] -z-10 animate-pulse" />
             <div className="absolute bottom-[-5%] left-[-5%] w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] -z-10" />
 
-            <div className="max-w-5xl mx-auto space-y-24">
+            <div className="max-w-7xl mx-auto space-y-24">
          
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
@@ -117,7 +117,7 @@ export default function FAQPage() {
                     className="space-y-20"
                 >
                     {faqCategories.map((cat, catIdx) => (
-                        <div key={catIdx} className="space-y-8">
+                        <div key={catIdx} className="space-y-8 max-w-5xl mx-auto">
                             <h2 className={`text-2xl font-black border-l-4 px-4 tracking-tight uppercase bg-linear-to-r ${cat.color} bg-clip-text text-transparent border-primary/50`}>
                                 {cat.category}
                             </h2>

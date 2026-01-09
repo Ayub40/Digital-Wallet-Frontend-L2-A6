@@ -16,7 +16,7 @@ export default function HomePage() {
             <div className="flex flex-col gap-y-24 md:gap-y-32">
                 <HeroSection />
 
-                {/* Main Scoped Container for all sections */}
+
                 <div className="max-w-7xl mx-auto w-full px-6 space-y-32 pb-24 container">
                     <StatsSection />
                     <FeaturesSection />
