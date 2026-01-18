@@ -20,6 +20,7 @@ import Faq from "@/pages/Public/Faq";
 import PrivacyPolicy from "@/pages/Public/PrivacyPolicy";
 import TermsOfService from "@/pages/Public/TermsOfService";
 import Security from "@/pages/Public/Security";
+import Contact from "@/pages/Public/Contact";
 
 export const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
             {
                 Component: Security,
                 path: "/security",
+            },
+            {
+                Component: Contact,
+                path: "/contact",
             },
         ],
     },
