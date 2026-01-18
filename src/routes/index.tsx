@@ -19,6 +19,7 @@ import About from "@/pages/Public/About";
 import Faq from "@/pages/Public/Faq";
 import PrivacyPolicy from "@/pages/Public/PrivacyPolicy";
 import TermsOfService from "@/pages/Public/TermsOfService";
+import Security from "@/pages/Public/Security";
 
 export const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
             {
                 Component: TermsOfService,
                 path: "/terms",
+            },
+            {
+                Component: Security,
+                path: "/security",
             },
         ],
     },
