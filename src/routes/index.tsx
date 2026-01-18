@@ -18,7 +18,7 @@ import Pricing from "@/pages/Public/Pricing";
 import About from "@/pages/Public/About";
 import Faq from "@/pages/Public/Faq";
 import PrivacyPolicy from "@/pages/Public/PrivacyPolicy";
-// import TermsOfService from "@/pages/Public/TermsOfService";
+import TermsOfService from "@/pages/Public/TermsOfService";
 
 export const router = createBrowserRouter([
     {
@@ -49,10 +49,10 @@ export const router = createBrowserRouter([
                 Component: PrivacyPolicy,
                 path: "/privacy-policy",
             },
-            // {
-            //     Component: TermsOfService,
-            //     path: "/terms",
-            // },
+            {
+                Component: TermsOfService,
+                path: "/terms",
+            },
         ],
     },
     // ================ Super-Admin Dashboard ====================
